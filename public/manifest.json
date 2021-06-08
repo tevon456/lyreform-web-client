@@ -1,0 +1,36 @@
+{
+  "short_name": "Lyreform",
+  "name": "Lyreform",
+  "icons": [
+    {
+      "src": "assets/manifest-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0060E8",
+  "background_color": "#ffffff",
+  "shortcuts": [
+    {
+      "name": "New Form",
+      "short_name": "New Form",
+      "description": "Create a new form in the editor",
+      "url": "/editor?utm_source=homescreen",
+      "icons": [
+        { "src": "assets/shortcuts/shortcut_new.png", "sizes": "192x192" }
+      ]
+    },
+    {
+      "name": "Home",
+      "short_name": "Home",
+      "description": "Go to the app homepage",
+      "url": "/home?utm_source=homescreen",
+      "icons": [
+        { "src": "assets/shortcuts/shortcut_home.png", "sizes": "192x192" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+:root {
+  /* COLOURS */
+  --primary: #0060e8;
+  --primary-hovered: #0459d1;
+  --secondary:#162447;
+  --success: #0ab696;
+  --success-hovered: #35786b;
+  --warning:#f7a440;
+  --warning-hovered:#d88929;
+  --danger: #ef233c;
+  --danger-hovered: #a0031d;
+
+  --neutral-100: #ffffff;
+  --neutral-150: #fafafa;
+  --neutral-200: #f5f6f8;
+  --neutral-300: #e6e9ef;
+  --neutral-350:#d7d8dd;
+  --neutral-400: #c5c7d0;
+  --neutral-500: #323338;
+
+  --text-light: var(--neutral-100);
+  --text-grey: #676879;
+  --text-dark: var(--neutral-500);
+  --text-primary: var(--primary);
+
+}

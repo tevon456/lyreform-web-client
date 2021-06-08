@@ -1,0 +1,40 @@
+{
+  "name": "ui-core",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  },
+  "dependencies": {
+    "@babel/core": "^7.13.0",
+    "@hookform/resolvers": "^2.5.2",
+    "axios": "^0.21.1",
+    "chroma-js": "^2.1.1",
+    "jwt-decode": "^3.1.2",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-hook-form": "^7.7.1",
+    "react-router-dom": "latest",
+    "react-scripts": "4.0.3",
+    "react-toastify": "^7.0.4",
+    "styled-components": "5.2.3",
+    "yup": "^0.32.9"
+  },
+  "keywords": []
+}

@@ -1,0 +1,63 @@
+@import url("./space.css");
+@import url("./color.css");
+@import url("./typography.css");
+@import url("./notification.css");
+
+body {
+  margin: 0;
+  background-color: rgba(246, 246, 247, 1);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+.App {
+  overflow-x: hidden;
+}
+
+*:focus {
+  box-shadow: 0 0 0 4px #5892fd;
+  outline: 0;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--text-light);
+}
+::-moz-selection {
+  background: var(--primary);
+  color: var(--text-light);
+}
+
+.grid-center {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.underline {
+  text-decoration-line: underline;
+  text-decoration-color: var(--primary);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+.hl {
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.vl {
+  border-left: 1px solid #d9d9d9;
+  padding: 16px 10px;
+}
+
+.text-help {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 2px;
+}
