@@ -10,12 +10,14 @@ import Login from "../pages/login";
 import ForgotPassword from "../pages/forgot_password";
 import NewPassword from "../pages/new_password";
 import { SessionContext } from "../context/Session";
+import { Builder } from "../pages/form_builder";
 
 export default function ApplicationRoutes() {
   const { hasValidSession } = useContext(SessionContext);
   return (
     <Switch>
       <ProtectedRoute exact path="/" component={Home} />
+      <ProtectedRoute exact path="/builder" component={Builder} />
       <Route exact path="/forgot-password" component={ForgotPassword} />
       <Route path="/new-password/:token" component={NewPassword} />
       <Route path="/verify-account/:token" component={VerifyAccount} />
