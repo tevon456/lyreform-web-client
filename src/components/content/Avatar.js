@@ -10,7 +10,14 @@ function Avatar({ src, name, alt, borderColor, ...props }) {
   let size = defaultSize;
   let initial = "...";
   let colorIndex = 0;
-  let colors = ["#390099", "#971C59", "#18856B", "#FDAF08"];
+  let colors = [
+    "#2940d3",
+    "#390099",
+    "#971C59",
+    "#FE6960",
+    "#FDAF08",
+    "#18856B",
+  ];
   if (name === undefined) {
     initial = "...";
   } else {
