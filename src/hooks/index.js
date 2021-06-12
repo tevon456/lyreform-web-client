@@ -4,9 +4,9 @@ import useRestResponse from "./useRestResponse";
 // import useInput from "./useInput";
 import useOnClickOutside from "./useOnClickOutside";
 // import useDialog from "./useDialog";
-// import useNavbar from "./useNavbar";
+import useNavbar from "./useNavbar";
 export {
-  //   useNavbar,
+  useNavbar,
   //   useDialog,
   useBackground,
   useRestResponse,
