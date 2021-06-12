@@ -60,7 +60,7 @@ export default function Button(props) {
 
   const SButton = styled.button`
     font-size: ${font};
-    display: flex;
+    display: ${props.display || "flex"};
     align-items: center;
     ${props.fullWidth
       ? "display: flex;" +
