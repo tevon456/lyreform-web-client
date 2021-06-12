@@ -37,7 +37,7 @@ function SessionProvider({ children }) {
     const timeToExpiration = Math.floor(
       (tokenExpiration - currentTime) / 60000
     );
-    console.log("session expires ", timeToExpiration, " minutes");
+    // console.log("session expires ", timeToExpiration, " minutes");
 
     return { time: timeToExpiration, tokens };
   };
