@@ -1,11 +1,12 @@
 import "./styles/app.css";
+import "react-toastify/dist/ReactToastify.css";
 import React, { useContext } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Content, UICore } from "./components";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { SessionContext } from "./context/Session";
 import ApplicationRoutes from "./route/ApplicationRoutes";
+import { Lyreform } from "./utils";
 
 export default function App() {
   const { hasValidSession, user, endSession } = useContext(SessionContext);
@@ -13,7 +14,7 @@ export default function App() {
     ? [
         {
           type: "buttonPrimary",
-          to: "/new-project",
+          to: "/builder",
           text: (
             <>
               <svg
@@ -54,6 +55,7 @@ export default function App() {
 }
 
 const UserAvatarMenu = ({ user, logout = () => {} }) => {
+  window.lyre = new Lyreform();
   return (
     <UICore.Box mg="0px" pd="0px" style={{ display: "contents" }} width="100px">
       <Content.DropDown
@@ -81,7 +83,7 @@ const UserAvatarMenu = ({ user, logout = () => {} }) => {
             style={{ marginLeft: "12px" }}
             size="medium"
             name={user.name}
-            src="https://source.unsplash.com/qP9Cr4LifQ8/90x90"
+            src="https://source.unsplash.com/OExQjtxbIpE/90x90"
           />
           <UICore.Box pd="4px" />
           <UICore.Text mt="0px" mb="0px" weight="300">
