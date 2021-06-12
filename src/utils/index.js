@@ -1,5 +1,6 @@
 import { Api } from "./api";
 import { Auth } from "./auth";
 import Notification from "./notification";
+import Lyreform from "./lyreform";
 
-export { Notification, Api, Auth };
+export { Lyreform, Notification, Api, Auth };
