@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { SessionContext } from "../context/Session";
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "../pages/home";
 import NotFound from "../pages/not_found";
@@ -9,8 +10,7 @@ import ResendConfirmation from "../pages/resend_confirmation";
 import Login from "../pages/login";
 import ForgotPassword from "../pages/forgot_password";
 import NewPassword from "../pages/new_password";
-import { SessionContext } from "../context/Session";
-import { Builder } from "../pages/form_builder";
+import { Builder } from "../pages/form_builder/Builder";
 
 export default function ApplicationRoutes() {
   const { hasValidSession } = useContext(SessionContext);
