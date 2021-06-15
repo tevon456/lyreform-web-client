@@ -13,6 +13,7 @@ export default function Toolbar() {
       pd="6px"
       bb="1px solid rgba(0,0,0,.1)"
       pos="fixed"
+      z="4"
       width="100vw"
       style={{
         boxShadow: "rgba(0,0,0,0.16) 0px 6px 8px -8px",
