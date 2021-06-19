@@ -1,16 +1,19 @@
 import useBackground from "./useBackground";
 import useRestResponse from "./useRestResponse";
+import { useWindowSize } from "./useWindowSize";
+import useOnClickOutside from "./useOnClickOutside";
+import useNavbar from "./useNavbar";
 // import useLockBodyScroll from "./useLockBodyScroll";
 // import useInput from "./useInput";
-import useOnClickOutside from "./useOnClickOutside";
 // import useDialog from "./useDialog";
-import useNavbar from "./useNavbar";
+
 export {
   useNavbar,
-  //   useDialog,
+  useWindowSize,
+  useOnClickOutside,
   useBackground,
   useRestResponse,
+  //   useDialog,
   //   useLockBodyScroll,
   //   useInput,
-  useOnClickOutside,
 };
