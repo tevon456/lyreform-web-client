@@ -1,10 +1,24 @@
-import React from "react";
-import { Content, UICore } from "../../../components";
+import React, { useEffect, useState } from "react";
 import chroma from "chroma-js";
+import { nanoid } from "nanoid";
 import Logo from "../../../resources/icons/logo";
+import { Content, UICore } from "../../../components";
+import { useHistory } from "react-router-dom";
+import { useWindowSize } from "../../../hooks";
 
-export default function Toolbar() {
+export default function Toolbar({ form, trigger = () => {} }) {
   const colorLogo = "#ffffff";
+  const history = useHistory();
+  const size = useWindowSize();
+  const [toolWidth, setToolWidth] = useState("100%");
+
+  useEffect(() => {
+    let parent = document.getElementById("canvas-list-area");
+    if (parent) {
+      setToolWidth(`${parent.offsetWidth}px`);
+    }
+  }, [size]);
+
   return (
     <UICore.Box
       mg="0px"
@@ -14,8 +28,9 @@ export default function Toolbar() {
       bb="1px solid rgba(0,0,0,.1)"
       pos="fixed"
       z="4"
-      width="100vw"
+      width={toolWidth}
       style={{
+        display: "block",
         boxShadow: "rgba(0,0,0,0.16) 0px 6px 8px -8px",
         transform: "translate3d(0, 0, 0)",
       }}
@@ -24,10 +39,22 @@ export default function Toolbar() {
         <Content.DropDown
           width="150px"
           items={[
-            { type: "action", text: "Back to home" },
+            {
+              type: "action",
+              text: "Back to home",
+              onClick: () => {
+                history.goBack();
+              },
+            },
             { type: "line" },
-            { type: "action", text: "Rename" },
-            { type: "action", text: "Clear fields" },
+            {
+              type: "action",
+              text: "Clear fields",
+              onClick: () => {
+                form.clearAllFields();
+                trigger();
+              },
+            },
             { type: "line" },
             { type: "action", text: "Export file" },
             { type: "action", text: "Import file" },
@@ -46,29 +73,184 @@ export default function Toolbar() {
         </Content.DropDown>
         <UICore.Box pd="0px" mg="0px">
           <UICore.Flex justify="space-between" align="center">
-            <UICore.Button
-              aria-label="Add field"
-              data-balloon-pos="down"
-              bg="transparent"
-              hover="#FFFFFF"
-              variant="outline"
-              color="#FFF"
+            <Content.DropDown
+              width="240px"
+              items={[
+                {
+                  type: "any",
+                  component: (
+                    <UICore.Text mb="4px" weight="300">
+                      Select a field type to insert from the list below
+                    </UICore.Text>
+                  ),
+                },
+                { type: "line" },
+                {
+                  type: "action",
+                  text: "Email",
+                  onClick: () => {
+                    form.createField("EMAIL", {
+                      name: `email_${nanoid(8)}`,
+                      label: "Email address",
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+                {
+                  type: "action",
+                  text: "Number",
+                  onClick: () => {
+                    form.createField("NUMBER", {
+                      name: `number_${nanoid(8)}`,
+                      label: "Number",
+                      min: 0,
+                      max: 100,
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+                {
+                  type: "action",
+                  text: "Short Answer",
+                  onClick: () => {
+                    form.createField("SHORT_ANSWER", {
+                      name: `text_${nanoid(8)}`,
+                      label: "Short Answer",
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+                {
+                  type: "action",
+                  text: "Long Answer",
+                  onClick: () => {
+                    form.createField("NUMBER", {
+                      name: `number_${nanoid(8)}`,
+                      label: "Number",
+                      min: 0,
+                      max: 100,
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+                {
+                  type: "action",
+                  text: "Date",
+                  onClick: () => {
+                    form.createField("NUMBER", {
+                      name: `number_${nanoid(8)}`,
+                      label: "Number",
+                      min: 0,
+                      max: 100,
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+                {
+                  type: "action",
+                  text: "Rich Text",
+                  onClick: () => {
+                    form.createField("NUMBER", {
+                      name: `number_${nanoid(8)}`,
+                      label: "Number",
+                      min: 0,
+                      max: 100,
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+                { type: "line" },
+                {
+                  type: "action",
+                  text: "Select",
+                  onClick: () => {
+                    form.createField("NUMBER", {
+                      name: `number_${nanoid(8)}`,
+                      label: "Number",
+                      min: 0,
+                      max: 100,
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+                {
+                  type: "action",
+                  text: "Radio",
+                  onClick: () => {
+                    form.createField("NUMBER", {
+                      name: `number_${nanoid(8)}`,
+                      label: "Number",
+                      min: 0,
+                      max: 100,
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+                {
+                  type: "action",
+                  text: "Checkbox",
+                  onClick: () => {
+                    form.createField("NUMBER", {
+                      name: `number_${nanoid(8)}`,
+                      label: "Number",
+                      min: 0,
+                      max: 100,
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+                { type: "line" },
+                {
+                  type: "action",
+                  text: "File Upload",
+                  onClick: () => {
+                    form.createField("NUMBER", {
+                      name: `number_${nanoid(8)}`,
+                      label: "Number",
+                      min: 0,
+                      max: 100,
+                      required: true,
+                    });
+                    trigger();
+                  },
+                },
+              ]}
+              x="4px"
+              y="18px"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                width="24px"
-                height="24px"
+              <UICore.Button
+                aria-label="Add field"
+                data-balloon-pos="down"
+                bg="transparent"
+                hover="#FFFFFF"
+                variant="outline"
+                color="#FFF"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </UICore.Button>{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  width="24px"
+                  height="24px"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </UICore.Button>
+            </Content.DropDown>{" "}
             <UICore.Button
               aria-label="Form colors"
               data-balloon-pos="down"
