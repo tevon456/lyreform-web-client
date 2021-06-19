@@ -78,7 +78,7 @@ function DropMap(props) {
     case "action":
       return (
         <DropDownItem cursor="pointer" pd="6px 4px" mg="0px" radius="4px">
-          <UICore.Text size="sm" mt="2px" mb="2px" weight="400" {...props}>
+          <UICore.Text size="rg" mt="2px" mb="2px" weight="400" {...props}>
             {props.text}
           </UICore.Text>
         </DropDownItem>
