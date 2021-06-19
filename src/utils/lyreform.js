@@ -212,10 +212,10 @@ export default class Lyreform {
      * @param {string} fieldId - id of field to query
      */
     fieldDetails: (fieldId) => {
-      let fields = this.Field.getAll();
-      let selectedField = this.Util.selectField(fields, "id", fieldId);
+      let fields = this.getAllFields();
+      let selectedField = this.util.selectField(fields, "id", fieldId);
       let index = fields.indexOf(selectedField[0]);
-      let details = this.Util.indexDetails(fields, index);
+      let details = this.util.indexDetails(fields, index);
       return {
         field: selectedField,
         details: details,
