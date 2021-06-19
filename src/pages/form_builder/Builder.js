@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { UICore } from "../../components";
 import { useNavbar } from "../../hooks";
 import Panel from "./components/Panel";
 import CanvasList from "./components/CanvasList";
-import Toolbar from "./components/Toolbar";
+import { FormContext } from "./context/FormContext";
 
 export function Builder() {
   useNavbar(false);
+  const form = useContext(FormContext);
+  const [trigger, setTrigger] = useState(Math.random());
+
+  const triggerRender = () => {
+    setTrigger(Math.random);
+  };
+
+  useEffect(() => {
+    console.log("Builder: ", form);
+    // eslint-disable-next-line
+  }, [trigger]);
 
   return (
     <UICore.Box
@@ -15,11 +26,10 @@ export function Builder() {
       style={{ overflow: "hidden" }}
       bg="url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAG0lEQVQYlWN49uzZf2IwwyBS2NXVNejdSLFCAKgycCDuKdMrAAAAAElFTkSuQmCC) repeat;"
     >
-      <Toolbar />
       <UICore.Box height="100vh" pd="0px">
-        <UICore.Flex align="center">
-          <Panel />
-          <CanvasList />
+        <UICore.Flex align="center" highlight>
+          <Panel form={form} />
+          <CanvasList form={form} trigger={triggerRender} />
         </UICore.Flex>
       </UICore.Box>
     </UICore.Box>
