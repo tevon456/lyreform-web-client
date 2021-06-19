@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "api": "cd ../../../Desktop/lyreform-api-postgress/ && npm run dev"
   },
   "eslintConfig": {
     "extends": "react-app"
