@@ -1,40 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { UICore } from "../../../components";
-import Checkbox from "./Checkbox";
-import Input from "./Input";
-import Select from "./Select";
+import { BaseForm } from "../form";
 
-export default function Panel() {
+export default function Panel({ form, fieldId, trigger = () => {} }) {
+  useEffect(() => {
+    console.log(fieldId);
+  }, [fieldId]);
   return (
     <UICore.Box
-      height="100vh"
+      height="107.5vh"
       width="160px"
       minWidth="130px"
       border="1px solid var(--neutral-300)"
       bg="#FFF"
-      pd="8px"
+      pd="0px"
       z="0"
-      pt="60px"
-      style={{ flexGrow: 1 }}
+      style={{ flexGrow: 1, overflow: "hidden" }}
     >
-      <Input label="Label" mb="16px" width="140px" />
-      <Input label="Placeholder" mb="16px" width="140px" />
-      <Input type="number" label="Max length" mb="16px" width="140px" />
-      <Select
-        label="Required"
-        mb="16px"
-        width="150px"
-        options={["yes", "no"]}
-      />
-      <Checkbox baseColor="var(--primary)" label="Required" />
-
-      <UICore.Line
-        style={{ display: "block" }}
-        variant="h"
-        thickness="1px"
-        length="94%"
-        color="var(--neutral-350)"
-      />
+      <UICore.Box mg="0px" pd="12px" mt="40px">
+        <BaseForm form={form} id={fieldId} triggerRender={trigger} />
+      </UICore.Box>
     </UICore.Box>
   );
 }
