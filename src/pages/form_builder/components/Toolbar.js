@@ -92,6 +92,7 @@ export default function Toolbar({ form, trigger = () => {} }) {
                     form.createField("EMAIL", {
                       name: `email_${nanoid(8)}`,
                       label: "Email address",
+                      placeholder: "",
                       required: true,
                     });
                     trigger();
@@ -118,6 +119,7 @@ export default function Toolbar({ form, trigger = () => {} }) {
                     form.createField("SHORT_ANSWER", {
                       name: `text_${nanoid(8)}`,
                       label: "Short Answer",
+                      placeholder: "",
                       required: false,
                     });
                     trigger();
@@ -130,8 +132,7 @@ export default function Toolbar({ form, trigger = () => {} }) {
                     form.createField("LONG_ANSWER", {
                       name: `long-text_${nanoid(8)}`,
                       label: "Long Answer",
-                      min: 0,
-                      max: "",
+                      placeholder: "",
                       required: false,
                     });
                     trigger();
