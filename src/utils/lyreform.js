@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 export default class Lyreform {
   #model = {
     name: "New Form",
-    logo_url: "",
+    logo_url: `https://dummyimage.com/400x400/3052a6/fff.png&text=logo`,
     published: false,
     header_foreground: "#ffffff",
     header_background: "#2035BD",
