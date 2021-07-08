@@ -1,9 +1,10 @@
 import React from "react";
 import { UICore } from "../../../components";
 import Toolbar from "./Toolbar";
+import { fieldDescription } from "../helpers/";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-export default function CanvasList({ form, trigger = () => {} }) {
+export default function CanvasList({ form, trigger = () => {}, setField }) {
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
@@ -41,6 +42,7 @@ export default function CanvasList({ form, trigger = () => {} }) {
                     list={form.getAllFields()}
                     trigger={trigger}
                     form={form}
+                    setField={setField}
                   />
                   {provided.placeholder}
                   <UICore.Box mt="10vh" />
@@ -54,13 +56,19 @@ export default function CanvasList({ form, trigger = () => {} }) {
   );
 }
 
-function FieldList({ list, form, trigger = () => {} }) {
+function FieldList({ list, form, trigger = () => {}, setField }) {
   return list.map((item, index) => (
-    <FieldBlock item={item} form={form} trigger={trigger} index={index} />
+    <FieldBlock
+      item={item}
+      form={form}
+      trigger={trigger}
+      index={index}
+      setField={setField}
+    />
   ));
 }
 
-function FieldBlock({ item, form, index, trigger = () => {} }) {
+function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
   return (
     <Draggable key={item.id} draggableId={item.id} index={index}>
       {(provided, snapshot) => (
@@ -79,7 +87,7 @@ function FieldBlock({ item, form, index, trigger = () => {} }) {
             position="relative"
             cursor="grab"
             bg="var(--neutral-200)"
-            mb="28px"
+            mb="42px"
             pd="0px"
           >
             <UICore.Box
@@ -125,8 +133,7 @@ function FieldBlock({ item, form, index, trigger = () => {} }) {
                   <UICore.Flex justify="space-around">
                     <UICore.Box
                       onClick={() => {
-                        form.duplicateField(item.id);
-                        trigger();
+                        setField(item.id);
                       }}
                       aria-label="Edit"
                       data-balloon-pos="down"
@@ -213,7 +220,20 @@ function FieldBlock({ item, form, index, trigger = () => {} }) {
                 </UICore.Box>
               </UICore.Flex>
             </UICore.Box>
-            {item.label}
+            <UICore.Box textAlign="left">
+              <UICore.Badge color="var(--text-dark)" bg="var(--neutral-400)">
+                {item.name.toLowerCase().split("_")[0]}
+              </UICore.Badge>
+              {item.required && (
+                <UICore.Badge color="#fff" bg="#8447ff">
+                  required
+                </UICore.Badge>
+              )}
+
+              <UICore.Text mt="4px" mb="0px" weight="300">
+                {fieldDescription(item.field_type)}
+              </UICore.Text>
+            </UICore.Box>
           </UICore.Box>
         </div>
       )}
