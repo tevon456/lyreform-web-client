@@ -9,6 +9,7 @@ export function Builder() {
   useNavbar(false);
   const form = useContext(FormContext);
   const [trigger, setTrigger] = useState(Math.random());
+  const [fieldId, setFieldId] = useState();
 
   const triggerRender = () => {
     setTrigger(Math.random);
@@ -28,8 +29,12 @@ export function Builder() {
     >
       <UICore.Box height="100vh" pd="0px">
         <UICore.Flex align="center" highlight>
-          <Panel form={form} />
-          <CanvasList form={form} trigger={triggerRender} />
+          <Panel form={form} fieldId={fieldId} trigger={triggerRender} />
+          <CanvasList
+            form={form}
+            trigger={triggerRender}
+            setField={setFieldId}
+          />
         </UICore.Flex>
       </UICore.Box>
     </UICore.Box>
