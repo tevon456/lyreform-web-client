@@ -1,2 +1,3 @@
 import BaseForm from "./BaseForm";
-export { BaseForm };
+import GeneralForm from "./GeneralForm";
+export { BaseForm, GeneralForm };
