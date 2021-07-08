@@ -30,8 +30,19 @@ const Input = ({ label, disabled, mt, mb, helper, helperColor, ...rest }) => {
   return (
     <UICore.Box mg="0px" pd="0px" mb={mb} mt={mt} textAlign="left">
       <UICore.Flex justify="space-between" wrap="wrap" align="center">
-        <UICore.Text as="label">{label}</UICore.Text>{" "}
-        <StyledInput disabled={disabled} {...rest} />
+        <UICore.Text as="label">{label}</UICore.Text>
+        <div>
+          <StyledInput disabled={disabled} {...rest} />
+          <UICore.Text
+            size="sm"
+            mt="4px"
+            mb="0px"
+            weight="300"
+            color={helperColor || "var(--text-grey)"}
+          >
+            {helper}
+          </UICore.Text>
+        </div>
       </UICore.Flex>
     </UICore.Box>
   );
