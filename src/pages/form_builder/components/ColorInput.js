@@ -49,10 +49,11 @@ const ColorInput = ({
   mb,
   helper,
   helperColor,
+  defaultValue,
   ...rest
 }) => {
-  const [color, setColor] = useState("#b32aa9");
   const ref = useRef();
+  const [color, setColor] = useState(defaultValue);
 
   useEffect(() => {
     // console.log(ref.current.value);
