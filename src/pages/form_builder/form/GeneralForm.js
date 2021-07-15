@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { UICore } from "../../../components";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -57,9 +57,9 @@ export default function GeneralForm({ form, id, triggerRender }) {
         type="submit"
         variant="outline"
         fullWidth
-        className="margin-top--md"
+        className="margin-top--lg"
       >
-        Save Changes
+        Apply Changes
       </UICore.Button>
     </form>
   );
