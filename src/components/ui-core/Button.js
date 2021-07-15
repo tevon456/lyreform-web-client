@@ -1,5 +1,55 @@
 import styled from "styled-components";
 
+const SButton = styled.button`
+  font-size: ${(props) => props.font};
+  display: ${(props) => props.display || "flex"};
+  align-items: center;
+  ${(props) =>
+    props.fullWidth
+      ? "display: flex;" +
+        "margin-right: 0px !important;" +
+        "width: 100%;" +
+        "justify-content: center;"
+      : null}
+  padding: ${(props) => props.padding};
+  font-weight: 500;
+  text-align: center;
+  border-radius: 4px;
+  border: 2px solid ${(props) => props.bg || props.sbackground};
+  color: ${(props) =>
+    props.variant === "normal" || props.variant === undefined
+      ? props.color || props.scolor
+      : props.color || "var(--text-dark)"};
+  background: ${(props) =>
+    props.variant === "normal" || props.variant === undefined
+      ? props.bg || props.sbackground || "var(--primary)"
+      : "transparent"};
+  transition-timing-function: ease;
+  transition-duration: 0.3s;
+
+  &:hover {
+    background: ${(props) =>
+      props.variant === "normal" || props.variant === undefined
+        ? props.hover || props.bg || props.shover || "var(--primary)"
+        : "transparent"};
+    box-shadow: 0px 3px 3px rgba(46, 41, 51, 0.08),
+      0px 2px 4px rgba(71, 63, 79, 0.08);
+    border: 2px solid ${(props) => props.hover || props.bg || props.shover};
+  }
+
+  &:disabled {
+    color: var(--text-light);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.5;
+    filter: grayscale(100%);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+`;
+
 /**
  * A base component used for composing more complex components like cards and alerts etc
  * @prop {string} size - sizes [sm,md,lg]
@@ -11,32 +61,32 @@ import styled from "styled-components";
  * @prop {string} fullWidth- take max space in width.
  */
 export default function Button(props) {
-  let padding, font, background, color, hover;
+  let padding, font, sbackground, scolor, shover;
   switch (props.kind) {
     case "primary":
-      background = "var(--primary)";
-      hover = "var(--primary-hovered)";
-      color = "#fff";
+      sbackground = "var(--primary)";
+      shover = "var(--primary-hovered)";
+      scolor = "#fff";
       break;
     case "secondary":
-      background = "#111";
-      hover = "var(--neutral-500)";
-      color = "#fff";
+      sbackground = "#111";
+      shover = "var(--neutral-500)";
+      scolor = "#fff";
       break;
     case "success":
-      background = "var(--success)";
-      hover = "var(--success-hovered)";
-      color = "#fff";
+      sbackground = "var(--success)";
+      shover = "var(--success-hovered)";
+      scolor = "#fff";
       break;
     case "danger":
-      background = "var(--danger)";
-      hover = "var(--danger-hovered)";
-      color = "#fff";
+      sbackground = "var(--danger)";
+      shover = "var(--danger-hovered)";
+      scolor = "#fff";
       break;
     default:
-      background = "var(--primary)";
-      hover = "var(--primary-hovered)";
-      color = "#fff";
+      sbackground = "var(--primary)";
+      shover = "var(--primary-hovered)";
+      scolor = "#fff";
       break;
   }
   switch (props.size) {
@@ -58,53 +108,7 @@ export default function Button(props) {
       break;
   }
 
-  const SButton = styled.button`
-    font-size: ${font};
-    display: ${props.display || "flex"};
-    align-items: center;
-    ${props.fullWidth
-      ? "display: flex;" +
-        "margin-right: 0px !important;" +
-        "width: 100%;" +
-        "justify-content: center;"
-      : null}
-    padding: ${padding};
-    font-weight: 500;
-    text-align: center;
-    border-radius: 4px;
-    border: 2px solid ${props.bg || background};
-    color: ${(props) =>
-      props.variant === "normal" || props.variant === undefined
-        ? props.color || color
-        : props.color || "var(--text-dark)"};
-    background: ${(props) =>
-      props.variant === "normal" || props.variant === undefined
-        ? props.bg || background || "var(--primary)"
-        : "transparent"};
-    transition-timing-function: ease;
-    transition-duration: 0.3s;
+  let attributes = { font, padding, sbackground, shover, scolor };
 
-    &:hover {
-      background: ${(props) =>
-        props.variant === "normal" || props.variant === undefined
-          ? props.hover || props.bg || hover || "var(--primary)"
-          : "transparent"};
-      box-shadow: 0px 3px 3px rgba(46, 41, 51, 0.08),
-        0px 2px 4px rgba(71, 63, 79, 0.08);
-      border: 2px solid ${props.hover || props.bg || hover};
-    }
-
-    &:disabled {
-      color: var(--text-light);
-      cursor: not-allowed;
-      box-shadow: none;
-      opacity: 0.5;
-      filter: grayscale(100%);
-    }
-
-    &:active {
-      transform: translateY(1px);
-    }
-  `;
-  return <SButton {...props}></SButton>;
+  return <SButton {...attributes} {...props}></SButton>;
 }
