@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import chroma from "chroma-js";
 import { nanoid } from "nanoid";
-import Logo from "../../../resources/icons/logo";
 import { Content, UICore } from "../../../components";
-import { useHistory } from "react-router-dom";
 import { useWindowSize } from "../../../hooks";
 
 export default function Toolbar({ form, trigger = () => {} }) {
-  const colorLogo = "#ffffff";
-  const history = useHistory();
   const size = useWindowSize();
   const [toolWidth, setToolWidth] = useState("100%");
 
@@ -36,41 +31,14 @@ export default function Toolbar({ form, trigger = () => {} }) {
       }}
     >
       <UICore.Flex justify="space-between" align="center">
-        <Content.DropDown
-          width="150px"
-          items={[
-            {
-              type: "action",
-              text: "Back to home",
-              onClick: () => {
-                history.goBack();
-              },
-            },
-            { type: "line" },
-            {
-              type: "action",
-              text: "Clear fields",
-              onClick: () => {
-                form.clearAllFields();
-                trigger();
-              },
-            },
-            { type: "line" },
-            { type: "action", text: "Export file" },
-            { type: "action", text: "Import file" },
-          ]}
-          x="4px"
-          y="18px"
+        <UICore.Text
+          color="var(--text-light)"
+          mt="0px"
+          mb="0px"
+          style={{ marginLeft: "12px" }}
         >
-          <Logo
-            width="34px"
-            height="34px"
-            colorA={colorLogo}
-            colorB={chroma(colorLogo || "#00204d")
-              .darken()
-              .hex()}
-          />
-        </Content.DropDown>
+          {form.getModel().name}
+        </UICore.Text>
         <UICore.Box pd="0px" mg="0px">
           <UICore.Flex justify="space-between" align="center">
             <Content.DropDown
