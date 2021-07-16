@@ -50,13 +50,19 @@ const ColorInput = ({
   helper,
   helperColor,
   defaultValue,
+  onChange,
   ...rest
 }) => {
   const ref = useRef();
   const [color, setColor] = useState(defaultValue);
 
+  const handleChange = (e) => {
+    setColor(e);
+    ref.current.focus();
+  };
+
   useEffect(() => {
-    // console.log(ref.current.value);
+    ref.current.value = color;
   }, [color]);
   return (
     <UICore.Box mg="0px" pd="0px" mb={mb} mt={mt} textAlign="left">
@@ -67,7 +73,7 @@ const ColorInput = ({
             placement="right-start"
             theme="light"
             interactive={true}
-            content={<HexColorPicker color={color} onChange={setColor} />}
+            content={<HexColorPicker color={color} onChange={handleChange} />}
           >
             <ColorWell color={color} type="button" />
           </Tippy>
@@ -76,9 +82,12 @@ const ColorInput = ({
             disabled={disabled}
             {...rest}
             onChange={(e) => {
+              onChange(e);
               setColor(e.target.value);
             }}
-            value={color}
+            onBlur={(e) => {
+              onChange(e);
+            }}
             ref={ref}
           />
           <UICore.Text
