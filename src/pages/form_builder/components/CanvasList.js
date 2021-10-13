@@ -31,7 +31,7 @@ export default function CanvasList({ form, trigger = () => {}, setField }) {
       id="canvas-list-area"
       style={{ flexGrow: 8, overflowY: "auto" }}
     >
-      <Toolbar form={form} trigger={trigger} />
+      <Toolbar form={form} trigger={trigger} setField={setField} />
       <div style={{ paddingTop: "100px" }}>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="characters">
@@ -101,8 +101,8 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
                       style={{ marginRight: "8px" }}
                       xmlns="http://www.w3.org/2000/svg"
                       class="icon icon-tabler icon-tabler-grip-vertical"
-                      width="24px"
-                      height="24px"
+                      width="20px"
+                      height="20px"
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="#FFFFFF"
@@ -120,7 +120,7 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
                     </svg>
                     <UICore.Text
                       color="var(--text-light)"
-                      size="md"
+                      size="rg"
                       weight="500"
                       mt="4px"
                       mb="4px"
@@ -141,7 +141,7 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
                       mg="4px"
                       pd="0px 8px"
                       radius="4px"
-                      border="2px solid var(--neutral-100)"
+                      // border="2px solid var(--neutral-100)"
                       color="var(--text-light)"
                     >
                       <svg
@@ -162,7 +162,8 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
                     </UICore.Box>
                     <UICore.Box
                       onClick={() => {
-                        form.duplicateField(item.id);
+                        let field = form.duplicateField(item.id);
+                        setField(field.id);
                         trigger();
                       }}
                       aria-label="Copy"
@@ -171,7 +172,7 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
                       mg="4px"
                       pd="0px 8px"
                       radius="4px"
-                      border="2px solid var(--neutral-100)"
+                      // border="2px solid var(--neutral-100)"
                       color="var(--text-light)"
                     >
                       <svg
@@ -189,6 +190,7 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
                     <UICore.Box
                       onClick={() => {
                         form.deleteFieldById(item.id);
+                        setField(null);
                         trigger();
                       }}
                       aria-label="Delete"
@@ -197,7 +199,7 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
                       mg="4px"
                       pd="4px 8px"
                       radius="4px"
-                      border="2px solid var(--neutral-100)"
+                      // border="2px solid var(--neutral-100)"
                       color="var(--text-light)"
                     >
                       {" "}
