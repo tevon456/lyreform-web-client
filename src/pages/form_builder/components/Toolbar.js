@@ -5,8 +5,12 @@ import { useWindowSize } from "../../../hooks";
 
 export default function Toolbar({
   form,
-  trigger = () => {},
-  setField = () => {},
+  trigger = () => {
+    /**/
+  },
+  setField = () => {
+    /**/
+  },
 }) {
   const size = useWindowSize();
   const [toolWidth, setToolWidth] = useState("100%");
