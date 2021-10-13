@@ -5,7 +5,13 @@ import { BaseForm, GeneralForm } from "../form";
 import { useHistory } from "react-router-dom";
 import chroma from "chroma-js";
 
-export default function Panel({ form, fieldId, trigger = () => {} }) {
+export default function Panel({
+  form,
+  fieldId,
+  trigger = () => {
+    /**/
+  },
+}) {
   const colorLogo = "#323338";
   const history = useHistory();
   const [type, setType] = useState("GENERAL");
