@@ -1,16 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { UICore, Content } from "../../../components";
 import Logo from "../../../resources/icons/logo";
-import { BaseForm } from "../form";
+import { BaseForm, GeneralForm } from "../form";
 import { useHistory } from "react-router-dom";
 import chroma from "chroma-js";
 
 export default function Panel({ form, fieldId, trigger = () => {} }) {
   const colorLogo = "#323338";
   const history = useHistory();
+  const [type, setType] = useState("GENERAL");
+
   useEffect(() => {
-    console.log(fieldId);
-  }, [fieldId]);
+    setType(form.util.fieldDetails(fieldId)?.field[0]?.field_type || "GENERAL");
+    // eslint-disable-next-line
+  }, [fieldId, type]);
   return (
     <UICore.Box
       height="107.5vh"
@@ -23,10 +26,12 @@ export default function Panel({ form, fieldId, trigger = () => {} }) {
     >
       <UICore.Box
         pd="5px"
+        pt="4px"
         mg="0px"
         bt="none"
         bl="none"
         br="none"
+        bg="none"
         border="1px solid var(--neutral-400)"
       >
         <UICore.Flex>
@@ -69,7 +74,11 @@ export default function Panel({ form, fieldId, trigger = () => {} }) {
       </UICore.Box>
 
       <UICore.Box mg="0px" pd="12px" mt="10px">
-        <BaseForm form={form} id={fieldId} triggerRender={trigger} />
+        {type === "GENERAL" ? (
+          <BaseForm form={form} id={fieldId} triggerRender={trigger} />
+        ) : (
+          <GeneralForm form={form} id={fieldId} triggerRender={trigger} />
+        )}
       </UICore.Box>
     </UICore.Box>
   );
