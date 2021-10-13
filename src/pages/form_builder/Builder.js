@@ -15,6 +15,10 @@ export function Builder() {
     setTrigger(Math.random);
   };
 
+  const setFieldTrigger = (id) => {
+    setFieldId(id);
+  };
+
   useEffect(() => {
     console.log("Builder: ", form);
     // eslint-disable-next-line
@@ -33,7 +37,7 @@ export function Builder() {
           <CanvasList
             form={form}
             trigger={triggerRender}
-            setField={setFieldId}
+            setField={setFieldTrigger}
           />
         </UICore.Flex>
       </UICore.Box>
