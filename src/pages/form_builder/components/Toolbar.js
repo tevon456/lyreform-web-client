@@ -3,7 +3,11 @@ import { nanoid } from "nanoid";
 import { Content, UICore } from "../../../components";
 import { useWindowSize } from "../../../hooks";
 
-export default function Toolbar({ form, trigger = () => {} }) {
+export default function Toolbar({
+  form,
+  trigger = () => {},
+  setField = () => {},
+}) {
   const size = useWindowSize();
   const [toolWidth, setToolWidth] = useState("100%");
 
@@ -57,12 +61,13 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "Email",
                   onClick: () => {
-                    form.createField("EMAIL", {
+                    let response = form.createField("EMAIL", {
                       name: `email_${nanoid(8)}`,
                       label: "Email address",
                       placeholder: "",
                       required: true,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
@@ -70,13 +75,14 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "Number",
                   onClick: () => {
-                    form.createField("NUMBER", {
+                    let response = form.createField("NUMBER", {
                       name: `number_${nanoid(8)}`,
                       label: "Number",
                       min: 0,
                       max: 100,
                       required: false,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
@@ -84,12 +90,13 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "Short Answer",
                   onClick: () => {
-                    form.createField("SHORT_ANSWER", {
+                    let response = form.createField("SHORT_ANSWER", {
                       name: `text_${nanoid(8)}`,
                       label: "Short Answer",
                       placeholder: "",
                       required: false,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
@@ -97,12 +104,13 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "Long Answer",
                   onClick: () => {
-                    form.createField("LONG_ANSWER", {
+                    let response = form.createField("LONG_ANSWER", {
                       name: `long-text_${nanoid(8)}`,
                       label: "Long Answer",
                       placeholder: "",
                       required: false,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
@@ -110,13 +118,14 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "Date",
                   onClick: () => {
-                    form.createField("DATE", {
+                    let response = form.createField("DATE", {
                       name: `date_${nanoid(8)}`,
                       label: "Date",
                       min: "",
                       max: "",
                       required: true,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
@@ -124,11 +133,12 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "Rich Text",
                   onClick: () => {
-                    form.createField("RICH_TEXT", {
+                    let response = form.createField("RICH_TEXT", {
                       name: `rich-text_${nanoid(8)}`,
                       label: "Rich Text",
                       required: false,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
@@ -137,7 +147,7 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "Select",
                   onClick: () => {
-                    form.createField("DROPDOWN_SELECT", {
+                    let response = form.createField("DROPDOWN_SELECT", {
                       name: `select_${nanoid(8)}`,
                       label: "Select",
                       options: [
@@ -146,6 +156,7 @@ export default function Toolbar({ form, trigger = () => {} }) {
                       ],
                       required: false,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
@@ -153,7 +164,7 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "Radio",
                   onClick: () => {
-                    form.createField("RADIO_GROUP", {
+                    let response = form.createField("RADIO_GROUP", {
                       name: `radio_${nanoid(8)}`,
                       label: "Radio",
                       options: [
@@ -162,6 +173,7 @@ export default function Toolbar({ form, trigger = () => {} }) {
                       ],
                       required: false,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
@@ -169,7 +181,7 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "Checkbox",
                   onClick: () => {
-                    form.createField("CHECKBOX_GROUP", {
+                    let response = form.createField("CHECKBOX_GROUP", {
                       name: `checkbox_${nanoid(8)}`,
                       label: "Checkbox",
                       options: [
@@ -178,6 +190,7 @@ export default function Toolbar({ form, trigger = () => {} }) {
                       ],
                       required: false,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
@@ -186,12 +199,13 @@ export default function Toolbar({ form, trigger = () => {} }) {
                   type: "action",
                   text: "File Uploader",
                   onClick: () => {
-                    form.createField("FILE", {
+                    let response = form.createField("FILE", {
                       name: `file_${nanoid(8)}`,
                       label: "File Uploader",
                       multiple: false,
                       required: false,
                     });
+                    setField(response.id);
                     trigger();
                   },
                 },
