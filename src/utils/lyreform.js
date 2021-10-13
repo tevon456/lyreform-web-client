@@ -82,7 +82,7 @@ export default class Lyreform {
   }
 
   /**
-   * Duplicate a field
+   * Duplicate a field and returns duplicated field
    * @param {string} fieldId - Id of field to duplicate
    */
   duplicateField(fieldId) {
@@ -103,6 +103,7 @@ export default class Lyreform {
         field.details.nextIndex
       );
     }
+    return payload;
   }
 
   /**
