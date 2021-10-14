@@ -39,6 +39,16 @@ export default function BaseForm({ form, triggerRender }) {
             mb="16px"
             width="140px"
           />
+          <UICore.Flex justify="center" align="center">
+            <UICore.Line
+              thickness="1px"
+              variant="h"
+              length="270px"
+              color="var(--neutral-300)"
+              mb="40px"
+            />
+          </UICore.Flex>
+
           <ColorInput
             name="header_foreground"
             helper={errors.header_foreground}
