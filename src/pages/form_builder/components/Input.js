@@ -26,13 +26,29 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = ({ label, disabled, mt, mb, helper, helperColor, ...rest }) => {
+const Input = ({
+  label,
+  disabled,
+  mt,
+  mb,
+  helper,
+  helperColor,
+  defaultValue,
+  ...rest
+}) => {
   return (
     <UICore.Box mg="0px" pd="0px" mb={mb} mt={mt} textAlign="left">
       <UICore.Flex justify="space-between" wrap="wrap" align="center">
-        <UICore.Text as="label">{label}</UICore.Text>
+        <UICore.Text as="label" weight="300">
+          {label}
+        </UICore.Text>
         <div>
-          <StyledInput disabled={disabled} {...rest} />
+          <StyledInput
+            disabled={disabled}
+            defaultValue={defaultValue}
+            value={defaultValue}
+            {...rest}
+          />
           <UICore.Text
             size="sm"
             mt="4px"
