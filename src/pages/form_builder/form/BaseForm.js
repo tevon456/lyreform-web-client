@@ -1,12 +1,19 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { UICore } from "../../../components";
 import * as yup from "yup";
 import Input from "../components/Input";
 import ColorInput from "../components/ColorInput";
+import { FormFieldSeparator, FormSubmit } from ".";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
+  header_foreground: yup.string().required(),
+  header_background: yup.string().required(),
+  body_foreground: yup.string().required(),
+  body_background: yup.string().required(),
+  controls_foreground: yup.string().required(),
+  controls_background: yup.string().required(),
+  page_background: yup.string().required(),
 });
 
 export default function BaseForm({ form, triggerRender }) {
@@ -39,16 +46,7 @@ export default function BaseForm({ form, triggerRender }) {
             mb="16px"
             width="140px"
           />
-          <UICore.Flex justify="center" align="center">
-            <UICore.Line
-              thickness="1px"
-              variant="h"
-              length="270px"
-              color="var(--neutral-300)"
-              mb="40px"
-            />
-          </UICore.Flex>
-
+          <FormFieldSeparator />
           <ColorInput
             name="header_foreground"
             helper={errors.header_foreground}
@@ -56,7 +54,7 @@ export default function BaseForm({ form, triggerRender }) {
             onChange={handleChange}
             defaultValue={form.getModel().header_foreground}
             mb="16px"
-            width="114px"
+            width="100px"
           />
           <ColorInput
             name="header_background"
@@ -65,7 +63,7 @@ export default function BaseForm({ form, triggerRender }) {
             onChange={handleChange}
             defaultValue={form.getModel().header_background}
             mb="16px"
-            width="114px"
+            width="100px"
           />
           <ColorInput
             name="body_foreground"
@@ -74,7 +72,7 @@ export default function BaseForm({ form, triggerRender }) {
             onChange={handleChange}
             defaultValue={form.getModel().body_foreground}
             mb="16px"
-            width="114px"
+            width="100px"
           />
           <ColorInput
             name="body_background"
@@ -83,7 +81,7 @@ export default function BaseForm({ form, triggerRender }) {
             onChange={handleChange}
             defaultValue={form.getModel().body_background}
             mb="16px"
-            width="114px"
+            width="100px"
           />
           <ColorInput
             name="controls_foreground"
@@ -92,7 +90,7 @@ export default function BaseForm({ form, triggerRender }) {
             onChange={handleChange}
             defaultValue={form.getModel().controls_foreground}
             mb="16px"
-            width="114px"
+            width="100px"
           />
 
           <ColorInput
@@ -102,7 +100,7 @@ export default function BaseForm({ form, triggerRender }) {
             onChange={handleChange}
             defaultValue={form.getModel().controls_background}
             mb="16px"
-            width="114px"
+            width="100px"
           />
           <ColorInput
             name="page_background"
@@ -110,19 +108,10 @@ export default function BaseForm({ form, triggerRender }) {
             label="Page Base"
             onChange={handleChange}
             defaultValue={form.getModel().page_background}
-            mb="16px"
-            width="114px"
+            mb="48px"
+            width="100px"
           />
-          <UICore.Button
-            type="submit"
-            variant="outline"
-            kind="secondary"
-            hover="var(--primary-hovered)"
-            fullWidth
-            className="margin-top--lg"
-          >
-            Apply Changes
-          </UICore.Button>
+          <FormSubmit />
         </Form>
       )}
     </Formik>

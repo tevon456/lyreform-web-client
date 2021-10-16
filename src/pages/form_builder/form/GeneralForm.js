@@ -1,66 +1,68 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { UICore } from "../../../components";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useEffect, useState } from "react";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
 import Input from "../components/Input";
 import Checkbox from "../components/Checkbox";
+import { FormSubmit } from ".";
 
 const schema = yup.object().shape({
+  id: yup.string().required(),
+  name: yup.string().required(),
+  field_type: yup.string().required(),
   label: yup.string().required(),
   placeholder: yup.string(),
-  required: yup.boolean(),
+  required: yup.string().required(),
 });
 
 export default function GeneralForm({ form, id, triggerRender }) {
-  let current = form.getFieldById(id)[0];
+  let [field, setField] = useState(form.getFieldById(id)?.field[0] || {});
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: { label: current.label, placeholder: "" },
-  });
-
-  const onSubmit = (data) => console.log("-", data);
+  useEffect(() => {
+    setField(form.getFieldById(id)?.field[0]);
+    // eslint-disable-next-line
+  }, [id, field]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        {...register("label")}
-        helper={errors.label?.message}
-        label="Label"
-        mb="16px"
-        width="140px"
-      />
-      <Input
-        {...register("placeholder")}
-        helper={errors.placeholder?.message}
-        label="Placeholder"
-        mb="16px"
-        width="140px"
-      />
-
-      <Checkbox
-        {...register("required")}
-        onChange={(e) => {
-          setValue("required", e.target.checked);
-        }}
-        baseColor="var(--neutral-500)"
-        label="Required"
-      />
-
-      <UICore.Button
-        type="submit"
-        variant="outline"
-        fullWidth
-        className="margin-top--lg"
-      >
-        Apply Changes
-      </UICore.Button>
-    </form>
+    <Formik
+      initialValues={{ ...field }}
+      enableReinitialize={true}
+      validationSchema={schema}
+      onSubmit={(values) => {
+        form.updateFieldById(field.id, values);
+        triggerRender();
+      }}
+    >
+      {({ handleChange, errors, values }) => (
+        <Form style={{ paddingBottom: "24px" }}>
+          <Input
+            name="label"
+            helper={errors?.label}
+            label="Label"
+            onChange={handleChange}
+            defaultValue={values?.label}
+            mb="16px"
+            width="140px"
+          />
+          <Input
+            name="placeholder"
+            helper={errors?.placeholder}
+            label="Placeholder"
+            onChange={handleChange}
+            defaultValue={values?.placeholder}
+            mb="16px"
+            width="140px"
+          />
+          <Checkbox
+            name="required"
+            label="Required"
+            onChange={handleChange}
+            defaultChecked={field.required}
+            mb="16px"
+            width="140px"
+          />
+          <FormSubmit />
+        </Form>
+      )}
+    </Formik>
   );
 }
