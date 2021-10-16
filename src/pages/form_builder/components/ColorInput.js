@@ -11,9 +11,10 @@ const StyledInput = styled.input`
   width: ${(props) => (props.width ? props.width : "100%")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "initial")};
   padding: 6px 4px;
-  padding-left:30px;
   transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
-  border: 1px solid rgba(169, 167, 167, 0.43);
+  box-shadow: rgba(169, 167, 167, 0.43) 0px 0px 0px 1px;
+  border:none;
+  border-left: 24px solid ${(props) => props.color || "white"};;
   border-radius: 2px;
   margin-top: 8px;
   display inline-block;
@@ -29,17 +30,6 @@ const StyledInput = styled.input`
   &:focus {
     box-shadow: var(--primary) 0px 0px 0px 2px;
   }
-`;
-
-const ColorWell = styled.button`
-  border: 2px solid white;
-  background: ${(props) => props.color || "white"};
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  transform: translate(3px, 11px);
-  border-radius: 24px;
-  box-shadow: inset 0 1px 3px #03030321;
 `;
 
 const ColorInput = ({
@@ -67,7 +57,10 @@ const ColorInput = ({
   return (
     <UICore.Box mg="0px" pd="0px" mb={mb} mt={mt} textAlign="left">
       <UICore.Flex justify="space-between" wrap="wrap" align="center">
-        <UICore.Text as="label">{label}</UICore.Text>
+        <UICore.Text as="label" weight="300">
+          {label}
+        </UICore.Text>
+
         <div>
           <Tippy
             placement="right-start"
@@ -75,21 +68,21 @@ const ColorInput = ({
             interactive={true}
             content={<HexColorPicker color={color} onChange={handleChange} />}
           >
-            <ColorWell color={color} type="button" />
+            <StyledInput
+              color={color}
+              disabled={disabled}
+              {...rest}
+              onChange={(e) => {
+                onChange(e);
+                setColor(e.target.value);
+              }}
+              onBlur={(e) => {
+                onChange(e);
+              }}
+              ref={ref}
+            />
           </Tippy>
 
-          <StyledInput
-            disabled={disabled}
-            {...rest}
-            onChange={(e) => {
-              onChange(e);
-              setColor(e.target.value);
-            }}
-            onBlur={(e) => {
-              onChange(e);
-            }}
-            ref={ref}
-          />
           <UICore.Text
             size="sm"
             mt="4px"
