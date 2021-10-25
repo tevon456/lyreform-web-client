@@ -19,6 +19,7 @@ export default function GeneralForm({ form, id, triggerRender }) {
 
   useEffect(() => {
     setField(form.getFieldById(id)?.field[0]);
+    console.log(field.label);
     // eslint-disable-next-line
   }, [id, field]);
 
@@ -39,7 +40,7 @@ export default function GeneralForm({ form, id, triggerRender }) {
             helper={errors?.label}
             label="Label"
             onChange={handleChange}
-            defaultValue={values?.label}
+            value={values?.label}
             mb="16px"
             width="140px"
           />
