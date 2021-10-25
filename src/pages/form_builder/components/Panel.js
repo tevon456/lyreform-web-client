@@ -24,11 +24,11 @@ export default function Panel({
     <UICore.Box
       height="107.5vh"
       width="160px"
-      minWidth="130px"
+      // minWidth="130px"
       bg="#FFF"
       pd="0px"
       z="0"
-      style={{ flexGrow: 1, overflow: "hidden" }}
+      style={{ flexGrow: 1, overflowY: "hidden" }}
     >
       <UICore.Box
         pd="5px"
@@ -79,7 +79,13 @@ export default function Panel({
         </UICore.Flex>
       </UICore.Box>
 
-      <UICore.Box mg="0px" pd="12px" mt="10px">
+      <UICore.Box
+        mg="0px"
+        pd="12px"
+        mt="0px"
+        height="90vh"
+        style={{ overflowY: "auto" }}
+      >
         {type === "GENERAL" ? (
           <BaseForm form={form} id={fieldId} triggerRender={trigger} />
         ) : (
