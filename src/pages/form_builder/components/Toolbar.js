@@ -50,12 +50,12 @@ export default function Toolbar({
         <UICore.Box pd="0px" mg="0px">
           <UICore.Flex justify="space-between" align="center">
             <Content.DropDown
-              width="240px"
+              width="270px"
               items={[
                 {
                   type: "any",
                   component: (
-                    <UICore.Text mb="4px" weight="300">
+                    <UICore.Text mb="4px" size="sm" weight="300">
                       Select a field type to insert from the list below
                     </UICore.Text>
                   ),
@@ -133,19 +133,19 @@ export default function Toolbar({
                     trigger();
                   },
                 },
-                {
-                  type: "action",
-                  text: "Rich Text",
-                  onClick: () => {
-                    let response = form.createField("RICH_TEXT", {
-                      name: `rich-text_${nanoid(8)}`,
-                      label: "Rich Text",
-                      required: false,
-                    });
-                    setField(response.id);
-                    trigger();
-                  },
-                },
+                // {
+                //   type: "action",
+                //   text: "Rich Text",
+                //   onClick: () => {
+                //     let response = form.createField("RICH_TEXT", {
+                //       name: `rich-text_${nanoid(8)}`,
+                //       label: "Rich Text",
+                //       required: false,
+                //     });
+                //     setField(response.id);
+                //     trigger();
+                //   },
+                // },
                 { type: "line" },
                 {
                   type: "action",
@@ -198,21 +198,21 @@ export default function Toolbar({
                     trigger();
                   },
                 },
-                { type: "line" },
-                {
-                  type: "action",
-                  text: "File Uploader",
-                  onClick: () => {
-                    let response = form.createField("FILE", {
-                      name: `file_${nanoid(8)}`,
-                      label: "File Uploader",
-                      multiple: false,
-                      required: false,
-                    });
-                    setField(response.id);
-                    trigger();
-                  },
-                },
+                // { type: "line" },
+                // {
+                //   type: "action",
+                //   text: "File Uploader",
+                //   onClick: () => {
+                //     let response = form.createField("FILE", {
+                //       name: `file_${nanoid(8)}`,
+                //       label: "File Uploader",
+                //       multiple: false,
+                //       required: false,
+                //     });
+                //     setField(response.id);
+                //     trigger();
+                //   },
+                // },
               ]}
               x="4px"
               y="18px"
@@ -238,7 +238,7 @@ export default function Toolbar({
                   />
                 </svg>
                 <UICore.Space amount={1} />
-                Insert
+                Add field
               </UICore.Button>
             </Content.DropDown>{" "}
             <UICore.Button
