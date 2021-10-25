@@ -246,6 +246,9 @@ export default function Toolbar({
               hover="#FFFFFF"
               variant="outline"
               color="#FFF"
+              onClick={() => {
+                setField(null);
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -255,14 +258,10 @@ export default function Toolbar({
                 width="24px"
                 height="24px"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z"
-                  clipRule="evenodd"
-                />
+                <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
               </svg>
               <UICore.Space amount={1} />
-              Color
+              Adjust
             </UICore.Button>
             <UICore.Button
               bg="transparent"
