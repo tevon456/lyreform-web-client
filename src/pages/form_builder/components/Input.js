@@ -46,7 +46,6 @@ const Input = ({
           <StyledInput
             disabled={disabled}
             defaultValue={defaultValue}
-            value={defaultValue}
             {...rest}
           />
           <UICore.Text
