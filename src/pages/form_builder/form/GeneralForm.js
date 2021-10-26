@@ -19,7 +19,6 @@ export default function GeneralForm({ form, id, triggerRender }) {
 
   useEffect(() => {
     setField(form.getFieldById(id)?.field[0]);
-    console.log(field.label);
     // eslint-disable-next-line
   }, [id, field]);
 
