@@ -39,14 +39,17 @@ export default function Toolbar({
       }}
     >
       <UICore.Flex justify="space-between" align="center">
-        <UICore.Text
-          color="var(--text-light)"
-          mt="0px"
-          mb="0px"
-          style={{ marginLeft: "12px" }}
-        >
-          {form.getModel().name}
-        </UICore.Text>
+        <div style={{ width: "170px" }}>
+          <UICore.Text
+            color="var(--text-light)"
+            className="truncate"
+            mt="0px"
+            mb="0px"
+            style={{ marginLeft: "12px" }}
+          >
+            {form.getModel().name}
+          </UICore.Text>
+        </div>
         <UICore.Box pd="0px" mg="0px">
           <UICore.Flex justify="space-between" align="center">
             <Content.DropDown
