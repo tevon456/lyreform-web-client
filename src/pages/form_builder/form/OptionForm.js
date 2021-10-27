@@ -24,7 +24,7 @@ export default function OptionForm({ form, id, triggerRender }) {
 
   useEffect(() => {
     setField(form.getFieldById(id)?.field[0]);
-    console.log(id, field.name, field.options);
+    setOptions(form.getFieldById(id)?.field[0]?.options || []);
     // eslint-disable-next-line
   }, [id, field]);
 
@@ -58,7 +58,7 @@ export default function OptionForm({ form, id, triggerRender }) {
             mb="16px"
             width="140px"
           />
-          <Options options={options} setOptions={setOptions} />
+          <Options options={options} setOptions={setOptions} id={id} />
           <FormSubmit />
         </Form>
       )}
@@ -66,7 +66,7 @@ export default function OptionForm({ form, id, triggerRender }) {
   );
 }
 
-function Options({ options = [], setOptions }) {
+function Options({ options = [], setOptions, id }) {
   let [error, setError] = useState(null);
   let util = new Lyreform().util;
 
@@ -97,8 +97,6 @@ function Options({ options = [], setOptions }) {
     setOptions(newOptions);
   }
 
-  useEffect(() => {}, [options]);
-
   return (
     <UICore.Box pd="0px" mg="0px" mb="24px" mt="-10px">
       <Input
@@ -126,7 +124,7 @@ function Options({ options = [], setOptions }) {
       {options.map((option, index) => (
         <UICore.Box
           mg="0px"
-          key={option.value}
+          key={option.key}
           mb="8px"
           pd="4px"
           radius="4px"
