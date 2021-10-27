@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { UICore, Content } from "../../../components";
 import Logo from "../../../resources/icons/logo";
-import { BaseForm, GeneralForm } from "../form";
+import { BaseForm, GeneralForm, NumberForm, OptionForm } from "../form";
 import { useHistory } from "react-router-dom";
 import chroma from "chroma-js";
 
@@ -14,10 +14,13 @@ export default function Panel({
 }) {
   const colorLogo = "#323338";
   const history = useHistory();
-  const [type, setType] = useState("GENERAL");
+  const [type, setType] = useState("BASE");
+
+  let general = ["SHORT_ANSWER", "LONG_ANSWER", "DATE", "EMAIL"];
+  let multiple = ["DROPDOWN_SELECT", "RADIO_GROUP", "CHECKBOX_GROUP"];
 
   useEffect(() => {
-    setType(form.util.fieldDetails(fieldId)?.field[0]?.field_type || "GENERAL");
+    setType(form.util.fieldDetails(fieldId)?.field[0]?.field_type || "BASE");
     // eslint-disable-next-line
   }, [fieldId, type]);
   return (
@@ -86,10 +89,14 @@ export default function Panel({
         height="90vh"
         style={{ overflowY: "auto" }}
       >
-        {type === "GENERAL" ? (
-          <BaseForm form={form} id={fieldId} triggerRender={trigger} />
-        ) : (
+        {general.includes(type) ? (
           <GeneralForm form={form} id={fieldId} triggerRender={trigger} />
+        ) : multiple.includes(type) ? (
+          <OptionForm form={form} id={fieldId} triggerRender={trigger} />
+        ) : type === "NUMBER" ? (
+          <NumberForm form={form} id={fieldId} triggerRender={trigger} />
+        ) : (
+          <BaseForm form={form} id={fieldId} triggerRender={trigger} />
         )}
       </UICore.Box>
     </UICore.Box>
