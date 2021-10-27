@@ -88,13 +88,11 @@ export default class Lyreform {
   duplicateField(fieldId) {
     let field = this.getFieldById(fieldId);
     let index = field.details.index;
-    let payload = { ...this.#model.fields[index] };
-    payload.id = nanoid(12);
+
+    let payload = { ...this.#model.fields[index], id: nanoid(12) };
     payload.label = payload.label + " (copy)";
-    if (payload.options) {
-      let parts = payload.name.split("_");
-      payload.name = parts[0] + "_" + nanoid(8);
-    }
+    payload.name = payload.name.split("_")[0] + "_" + nanoid(8);
+
     this.#model.fields.push(payload);
     if (field.details.nextIndex !== null) {
       this.util.moveArrayEntry(
