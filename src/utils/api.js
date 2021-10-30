@@ -109,10 +109,10 @@ export class Api {
   */
 
   /**
-   * Retrieve all forms that belong to the authenticated user
+   * Retrieve all form that belong to the authenticated user
    */
   static async getAllForms() {
-    const res = await axios.get("/forms");
+    const res = await axios.get("/form");
     return res;
   }
 
@@ -121,7 +121,7 @@ export class Api {
    */
   static async getForm(id) {
     if (id) {
-      const res = await axios.get(`/forms/${id}`, id);
+      const res = await axios.get(`/form/${id}`, id);
       return res;
     }
   }
@@ -131,7 +131,7 @@ export class Api {
    */
   static async getFormSubmissions(id) {
     if (id) {
-      const res = await axios.get(`/forms/${id}/submissions`);
+      const res = await axios.get(`/form/${id}/submissions`);
       return res;
     }
   }
@@ -144,7 +144,7 @@ export class Api {
       delete data.user;
       delete data.id;
     }
-    const res = await axios.post("/forms", data);
+    const res = await axios.post("/form", data);
     return res;
   }
 
@@ -154,7 +154,7 @@ export class Api {
   static async deleteForm(id) {
     const res = await axios({
       method: "delete",
-      url: `/forms/${id}`,
+      url: `/form/${id}`,
       data: { id },
     });
     return res;
@@ -168,7 +168,7 @@ export class Api {
       delete data.user;
       delete data.id;
     }
-    const res = await axios({ method: "patch", url: `/forms/${id}`, data });
+    const res = await axios({ method: "patch", url: `/form/${id}`, data });
     return res;
   }
 
