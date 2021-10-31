@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { Content, UICore } from "../../../components";
 import { useWindowSize } from "../../../hooks";
+import { Api } from "../../../utils/api";
+import Notification from "../../../utils/notification";
+import { useHistory } from "react-router";
 
 export default function Toolbar({
   form,
@@ -39,7 +42,11 @@ export default function Toolbar({
       }}
     >
       <UICore.Flex justify="space-between" align="center">
-        <div style={{ width: "170px" }}>
+        <div
+          aria-label={form.getModel().name}
+          data-balloon-pos="down"
+          style={{ maxWidth: "170px" }}
+        >
           <UICore.Text
             color="var(--text-light)"
             className="truncate"
@@ -293,20 +300,59 @@ export default function Toolbar({
           </UICore.Flex>
         </UICore.Box>
 
-        <Save />
+        <Save form={form} />
       </UICore.Flex>
     </UICore.Box>
   );
 }
 
-function Save() {
+function Save({ form }) {
+  const history = useHistory();
+
+  async function saveForm(data = {}, id = null) {
+    if (id) {
+      Api.updateForm(id, data)
+        .then((res) => {
+          console.log(res);
+          Notification.success("Save successful.");
+        })
+        .catch((error) => {
+          console.log(error);
+          Notification.danger("An error occurred while saving your form.");
+        });
+    } else {
+      Api.createForm(data)
+        .then((res) => {
+          form.setIdFromBackend(res.data.uuid);
+          Notification.success("Save successful.");
+        })
+        .catch((error) => {
+          Notification.danger("An error occurred while saving your form.");
+          console.log(error);
+        });
+    }
+  }
+
   return (
     <UICore.Box pd="0px" mg="0px" mr="20px">
       <Content.DropDown
         width="150px"
         items={[
-          { type: "action", text: "Save only" },
-          { type: "action", text: "Save and publish" },
+          {
+            type: "action",
+            text: "Save",
+            onClick: async () => {
+              await saveForm(form.getModel(), form.getId());
+            },
+          },
+          {
+            type: "action",
+            text: "Save and Exit",
+            onClick: async () => {
+              await saveForm(form.getModel(), form.getId());
+              history.goBack();
+            },
+          },
         ]}
         x="-108px"
         y="18px"
