@@ -4,9 +4,11 @@ import * as yup from "yup";
 import Input from "../components/Input";
 import ColorInput from "../components/ColorInput";
 import { FormFieldSeparator, FormSubmit } from ".";
+import Checkbox from "../components/Checkbox";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
+  published: yup.boolean().required(),
   header_foreground: yup.string().required(),
   header_background: yup.string().required(),
   body_foreground: yup.string().required(),
@@ -21,6 +23,7 @@ export default function BaseForm({ form, triggerRender }) {
     <Formik
       initialValues={{
         name: form.getModel().name,
+        published: form.getModel().published,
         header_foreground: form.getModel().header_foreground,
         header_background: form.getModel().header_background,
         body_foreground: form.getModel().body_foreground,
@@ -43,6 +46,14 @@ export default function BaseForm({ form, triggerRender }) {
             label="Name"
             onChange={handleChange}
             defaultValue={form.getModel().name}
+            mb="16px"
+            width="140px"
+          />
+          <Checkbox
+            name="published"
+            label="Published"
+            onChange={handleChange}
+            defaultChecked={form.getModel().published}
             mb="16px"
             width="140px"
           />
