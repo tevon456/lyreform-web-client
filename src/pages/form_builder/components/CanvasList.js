@@ -226,15 +226,42 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
               <UICore.Badge color="var(--text-dark)" bg="var(--neutral-400)">
                 {item.name.toLowerCase().split("_")[0]}
               </UICore.Badge>
+
               {item.required && (
                 <UICore.Badge color="#fff" bg="#8447ff">
                   required
                 </UICore.Badge>
               )}
 
-              <UICore.Text mt="4px" mb="0px" weight="300">
+              <UICore.Text mt="4px" mb="20px" weight="300">
                 {fieldDescription(item.field_type)}
               </UICore.Text>
+
+              {item?.options
+                ? item.options.map((option) => (
+                    <UICore.Box
+                      mg="0px"
+                      key={option.value}
+                      mb="8px"
+                      pd="4px"
+                      width="270px"
+                      radius="4px"
+                      bg="#ececec"
+                      border="1px solid rgba(0,0,0,.1)"
+                    >
+                      <UICore.Text
+                        className="truncate"
+                        width="240px"
+                        mb="2px"
+                        weight="300"
+                        mt="2px"
+                        color="var(--text-dark)"
+                      >
+                        {option.value}
+                      </UICore.Text>
+                    </UICore.Box>
+                  ))
+                : null}
             </UICore.Box>
           </UICore.Box>
         </div>
