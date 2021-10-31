@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 export default class Lyreform {
+  #id = null;
   #model = {
     name: "New Form",
     logo_url: `https://dummyimage.com/400x400/3052a6/fff.png&text=logo`,
@@ -21,6 +22,20 @@ export default class Lyreform {
 
   constructor() {
     this.#historical.entries.push(this.#model);
+  }
+
+  /**
+   * @param {string} uuid uuid from a form uploaded
+   */
+  setIdFromBackend(uuid) {
+    this.#id = uuid;
+  }
+
+  /**
+   * returns the id from backend that is unique to this forms instance.
+   */
+  getId() {
+    return this.#id;
   }
 
   /**
