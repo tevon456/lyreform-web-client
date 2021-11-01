@@ -47,13 +47,19 @@ function DialogInner(props) {
           >
             {props.name}
           </UICore.Text>
-          <UICore.Box
-            cursor="pointer"
+          <UICore.Button
             width="40px"
             height="30px"
+            bg="transparent"
+            autoFocus
             mg="0px"
             pd="0px"
-            as="button"
+            css={`
+              color: green;
+              focus {
+                outline: 2px solid black;
+              }
+            `}
             data-cy="close-dialog"
             onClick={() => props.close()}
           >
@@ -75,7 +81,7 @@ function DialogInner(props) {
                 />
               </svg>
             </UICore.Flex>
-          </UICore.Box>
+          </UICore.Button>
         </UICore.Flex>
       </UICore.Box>
       <UICore.Box
