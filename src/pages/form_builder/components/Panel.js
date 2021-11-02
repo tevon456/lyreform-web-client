@@ -58,7 +58,7 @@ export default function Panel({
   return (
     <UICore.Box
       height="107.5vh"
-      width="200px"
+      maxWidth="290px"
       minWidth="180px"
       bg="#FFF"
       pd="0px"
