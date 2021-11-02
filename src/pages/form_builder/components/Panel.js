@@ -4,6 +4,7 @@ import Logo from "../../../resources/icons/logo";
 import { BaseForm, GeneralForm, NumberForm, OptionForm } from "../form";
 import { useHistory } from "react-router-dom";
 import chroma from "chroma-js";
+import { Api, Notification } from "../../../utils";
 
 export default function Panel({
   form,
@@ -12,12 +13,43 @@ export default function Panel({
     /**/
   },
 }) {
-  const colorLogo = "#323338";
+  const colorLogo = "#FFFFFF";
   const history = useHistory();
   const [type, setType] = useState("BASE");
 
   let general = ["SHORT_ANSWER", "LONG_ANSWER", "DATE", "EMAIL"];
   let multiple = ["DROPDOWN_SELECT", "RADIO_GROUP", "CHECKBOX_GROUP"];
+
+  async function saveForm(data = {}, id = null) {
+    if (id) {
+      let payload = {
+        ...data,
+        uuid: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        user_id: undefined,
+      };
+      Api.updateForm(id, payload)
+        .then((res) => {
+          Notification.success("Save successful.");
+          console.log(res);
+        })
+        .catch((error) => {
+          Notification.danger("An error occurred while updating your form.");
+          console.log(error);
+        });
+    } else {
+      Api.createForm(data)
+        .then((res) => {
+          form.setIdFromBackend(res.data.uuid);
+          Notification.success("Save successful.");
+        })
+        .catch((error) => {
+          Notification.danger("An error occurred while saving your form.");
+          console.log(error);
+        });
+    }
+  }
 
   useEffect(() => {
     setType(form.util.fieldDetails(fieldId)?.field[0]?.field_type || "BASE");
@@ -39,22 +71,40 @@ export default function Panel({
         mg="0px"
         bt="none"
         bl="none"
-        br="none"
-        bg="none"
-        border="1px solid var(--neutral-400)"
+        br="1px solid var(--neutral-400)"
+        bg="#2A2A2A"
+        border="1px solid #2A2A2A"
       >
         <UICore.Flex>
           <Content.DropDown
-            width="150px"
+            aria-label={"Main menu"}
+            data-balloon-pos="right"
+            width="170px"
+            dark
             items={[
               {
                 type: "action",
-                text: "Back to home",
+                text: "Home",
                 onClick: () => {
-                  history.goBack();
+                  history.push("/");
                 },
               },
               { type: "line" },
+              {
+                type: "action",
+                text: "Save",
+                onClick: async () => {
+                  await saveForm(form.getModel(), form.getId());
+                },
+              },
+              {
+                type: "action",
+                text: "Save and Exit",
+                onClick: async () => {
+                  await saveForm(form.getModel(), form.getId());
+                  history.goBack();
+                },
+              },
               {
                 type: "action",
                 text: "Clear fields",
@@ -64,8 +114,7 @@ export default function Panel({
                 },
               },
               { type: "line" },
-              { type: "action", text: "Export file" },
-              { type: "action", text: "Import file" },
+              { type: "action", text: "Delete" },
             ]}
             x="4px"
             y="18px"
