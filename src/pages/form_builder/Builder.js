@@ -5,7 +5,7 @@ import Panel from "./components/Panel";
 import CanvasList from "./components/CanvasList";
 import { FormContext } from "./context/FormContext";
 import { useLocation } from "react-router";
-import { Api } from "../../utils";
+import { Api, Notification } from "../../utils";
 
 export function Builder() {
   useNavbar(false);
@@ -34,6 +34,7 @@ export function Builder() {
           setLoading(false);
         })
         .catch((error) => {
+          Notification.danger("An error occurred while loading your form");
           console.log(error);
         });
     }
