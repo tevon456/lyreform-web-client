@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { UICore } from "../../../components/";
 import { HexColorPicker } from "react-colorful";
+import chroma from "chroma-js";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
@@ -12,9 +13,10 @@ const StyledInput = styled.input`
   cursor: ${(props) => (props.disabled ? "not-allowed" : "initial")};
   padding: 6px 4px;
   transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
-  box-shadow: rgba(169, 167, 167, 0.43) 0px 0px 0px 1px;
+  box-shadow: ${(props) =>
+    props.border || "rgba(169, 167, 167, 0.43)"}  0px 0px 0px 1px;
   border:none;
-  border-left: 24px solid ${(props) => props.color || "white"};;
+  border-left: 24px solid ${(props) => props.color || "white"};
   border-radius: 2px;
   margin-top: 8px;
   display inline-block;
@@ -44,7 +46,8 @@ const ColorInput = ({
   ...rest
 }) => {
   const ref = useRef();
-  const [color, setColor] = useState(rest.value || defaultValue);
+  const [color, setColor] = useState(rest.value || defaultValue || "#fff");
+  const [valid, setValid] = useState(true);
 
   const handleChange = (e) => {
     setColor(e);
@@ -52,8 +55,10 @@ const ColorInput = ({
   };
 
   useEffect(() => {
+    setValid(chroma.valid(color));
     ref.current.value = color;
   }, [color]);
+
   return (
     <UICore.Box mg="0px" pd="0px" mb={mb} mt={mt} textAlign="left">
       <UICore.Flex justify="space-between" wrap="wrap" align="center">
@@ -71,6 +76,7 @@ const ColorInput = ({
             <StyledInput
               color={color}
               disabled={disabled}
+              border={valid ? "rgba(169, 167, 167, 0.43)" : "red"}
               {...rest}
               onChange={(e) => {
                 onChange(e);
