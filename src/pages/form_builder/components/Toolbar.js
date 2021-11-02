@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { Content, UICore } from "../../../components";
 import { useWindowSize } from "../../../hooks";
-import { Api } from "../../../utils/api";
-import Notification from "../../../utils/notification";
-import { useHistory } from "react-router";
+import { SessionContext } from "../../../context/Session";
 
 export default function Toolbar({
   form,
@@ -17,6 +15,7 @@ export default function Toolbar({
 }) {
   const size = useWindowSize();
   const [toolWidth, setToolWidth] = useState("100%");
+  const { user, endSession } = useContext(SessionContext);
 
   useEffect(() => {
     let parent = document.getElementById("canvas-list-area");
@@ -299,68 +298,31 @@ export default function Toolbar({
             </UICore.Button>
           </UICore.Flex>
         </UICore.Box>
-
-        <Save form={form} />
+        <div style={{ marginRight: "50px" }}>
+          <Content.DropDown
+            width="170px"
+            items={[
+              {
+                type: "action",
+                text: "Logout",
+                onClick: () => {
+                  endSession();
+                },
+              },
+            ]}
+            x="-160px"
+            y="32px"
+          >
+            <UICore.Flex align="center" justify="center">
+              <Content.Avatar
+                size="medium"
+                name={user.name}
+                style={{ margin: "-30px" }}
+              />
+            </UICore.Flex>
+          </Content.DropDown>
+        </div>
       </UICore.Flex>
-    </UICore.Box>
-  );
-}
-
-function Save({ form }) {
-  const history = useHistory();
-
-  async function saveForm(data = {}, id = null) {
-    if (id) {
-      Api.updateForm(id, data)
-        .then((res) => {
-          console.log(res);
-          Notification.success("Save successful.");
-        })
-        .catch((error) => {
-          console.log(error);
-          Notification.danger("An error occurred while saving your form.");
-        });
-    } else {
-      Api.createForm(data)
-        .then((res) => {
-          form.setIdFromBackend(res.data.uuid);
-          Notification.success("Save successful.");
-        })
-        .catch((error) => {
-          Notification.danger("An error occurred while saving your form.");
-          console.log(error);
-        });
-    }
-  }
-
-  return (
-    <UICore.Box pd="0px" mg="0px" mr="20px">
-      <Content.DropDown
-        width="150px"
-        items={[
-          {
-            type: "action",
-            text: "Save",
-            onClick: async () => {
-              await saveForm(form.getModel(), form.getId());
-            },
-          },
-          {
-            type: "action",
-            text: "Save and Exit",
-            onClick: async () => {
-              await saveForm(form.getModel(), form.getId());
-              history.goBack();
-            },
-          },
-        ]}
-        x="-108px"
-        y="18px"
-      >
-        <UICore.Button bg="#D3D3D3" hover="#fff" variant="outline" color="#fff">
-          Save
-        </UICore.Button>
-      </Content.DropDown>
     </UICore.Box>
   );
 }
