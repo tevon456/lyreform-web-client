@@ -134,8 +134,8 @@ export default function Toolbar({
                     let response = form.createField("DATE", {
                       name: `date_${nanoid(8)}`,
                       label: "Date",
-                      min: "",
-                      max: "",
+                      // TODO min: "",
+                      // TODO max: "",
                       required: true,
                     });
                     setField(response.id);
