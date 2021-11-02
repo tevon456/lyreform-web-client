@@ -44,7 +44,7 @@ const ColorInput = ({
   ...rest
 }) => {
   const ref = useRef();
-  const [color, setColor] = useState(defaultValue);
+  const [color, setColor] = useState(rest.value || defaultValue);
 
   const handleChange = (e) => {
     setColor(e);
