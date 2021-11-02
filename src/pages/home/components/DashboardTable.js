@@ -17,6 +17,7 @@ export default function DashboardTable({ columns = [], data = [] }) {
     Api.deleteForm(id)
       .then(() => {
         Notification.success("Form deleted successfully");
+        window.location.reload();
       })
       .catch(() => {
         Notification.danger("There was an error deleting this form");
