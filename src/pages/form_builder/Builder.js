@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UICore } from "../../components";
-import { useNavbar } from "../../hooks";
+import { useNavbar, useRestResponse } from "../../hooks";
 import Panel from "./components/Panel";
 import CanvasList from "./components/CanvasList";
 import { FormContext } from "./context/FormContext";
+import { useLocation } from "react-router";
+import { Api } from "../../utils";
 
 export function Builder() {
   useNavbar(false);
+  const location = useLocation();
   const form = useContext(FormContext);
   const [trigger, setTrigger] = useState(Math.random());
   const [fieldId, setFieldId] = useState();
+  const [initial, setInitial] = useState(false);
+  const { data, setData, loading, setLoading } = useRestResponse({});
 
   const triggerRender = () => {
     setTrigger(Math.random);
@@ -21,8 +26,26 @@ export function Builder() {
 
   useEffect(() => {
     console.log("Builder: ", form);
+    if (location.state?.formId) {
+      Api.getForm(location.state?.formId)
+        .then((res) => {
+          setData(res.data);
+          setInitial(true);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    setLoading(false);
     // eslint-disable-next-line
-  }, [trigger]);
+  }, [trigger, loading]);
+
+  if (data && initial === false) {
+    // form hasn't loaded before so load it onto the model
+    form.setIdFromBackend(data.uuid);
+    form.loadSchema(data);
+  }
 
   return (
     <UICore.Box
