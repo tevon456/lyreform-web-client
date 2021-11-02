@@ -83,7 +83,6 @@ const UserAvatarMenu = ({ user, logout = () => {} }) => {
             style={{ marginLeft: "12px" }}
             size="medium"
             name={user.name}
-            src="https://source.unsplash.com/OExQjtxbIpE/90x90"
           />
           <UICore.Box pd="4px" />
           <UICore.Text mt="0px" mb="0px" weight="300">
