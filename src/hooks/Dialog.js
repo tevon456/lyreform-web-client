@@ -6,7 +6,7 @@ import { UICore } from "../components";
 
 function Dialog(props) {
   const ref = useRef();
-  useOnClickOutside(ref, () => props.close || null);
+  useOnClickOutside(ref, () => props.close() || null);
 
   if (!props.open) return null;
   return ReactDOM.createPortal(
@@ -14,7 +14,6 @@ function Dialog(props) {
       <DialogBackground blur={props.blur}>
         <div ref={ref}>
           <DialogInner
-            bg="#111"
             name={props.name}
             minWidth="300px"
             close={props.close}
