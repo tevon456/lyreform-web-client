@@ -13,7 +13,7 @@ function useRestResponse(initial) {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return [{ loading, setLoading, data, setData, error, setError }];
+  return { loading, setLoading, data, setData, error, setError };
 }
 
 export default useRestResponse;
