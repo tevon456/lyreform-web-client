@@ -64,7 +64,13 @@ function Menu({ x, y, width, items, children, openOnHover, dark, ...rest }) {
             pd="4px"
           >
             {items
-              ? items.map((d) => <DropMap key={Math.random()} {...d} />)
+              ? items.map((d) => (
+                  <DropMap
+                    key={Math.random()}
+                    hoverColor={rest.hoverColor}
+                    {...d}
+                  />
+                ))
               : null}
           </UICore.Box>
         </UICore.Box>
@@ -82,6 +88,7 @@ function DropMap(props) {
           pd="6px 4px"
           mg="0px"
           radius="4px"
+          hoverColor={props.hoverColor}
           color="inherit"
         >
           <UICore.Text
@@ -119,7 +126,7 @@ function DropMap(props) {
 
 const DropDownItem = styled(UICore.Box)`
   &:hover {
-    background: var(--primary);
+    background: ${(props) => props.hoverColor || "var(--primary)"};
   }
   &:hover > p {
     color: white;

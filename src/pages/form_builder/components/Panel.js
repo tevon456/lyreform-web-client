@@ -81,6 +81,7 @@ export default function Panel({
             data-balloon-pos="right"
             width="170px"
             dark
+            hoverColor="rgb(92, 92, 92)"
             items={[
               {
                 type: "action",
