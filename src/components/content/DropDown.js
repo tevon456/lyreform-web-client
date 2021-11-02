@@ -3,7 +3,7 @@ import { UICore } from "../";
 import { useOnClickOutside } from "../../hooks";
 import styled from "styled-components";
 
-function Menu({ x, y, width, items, children, openOnHover, ...rest }) {
+function Menu({ x, y, width, items, children, openOnHover, dark, ...rest }) {
   const [open, setOpen] = useState(false);
   const toggle = () => {
     setOpen(!open);
@@ -57,10 +57,10 @@ function Menu({ x, y, width, items, children, openOnHover, ...rest }) {
             width={width || "max-content"}
             radius="4px"
             height="auto"
-            color={"black"}
+            color={dark ? "var(--text-light)" : "var(--text-dark)"}
             border="1px solid #d3dae6"
             mg="0px"
-            bg="white"
+            bg={dark ? "var(--neutral-600)" : "white"}
             pd="4px"
           >
             {items
@@ -77,8 +77,21 @@ function DropMap(props) {
   switch (props.type) {
     case "action":
       return (
-        <DropDownItem cursor="pointer" pd="6px 4px" mg="0px" radius="4px">
-          <UICore.Text size="rg" mt="2px" mb="2px" weight="400" {...props}>
+        <DropDownItem
+          cursor="pointer"
+          pd="6px 4px"
+          mg="0px"
+          radius="4px"
+          color="inherit"
+        >
+          <UICore.Text
+            size="rg"
+            mt="2px"
+            mb="2px"
+            weight="400"
+            color="inherit"
+            {...props}
+          >
             {props.text}
           </UICore.Text>
         </DropDownItem>
@@ -93,7 +106,7 @@ function DropMap(props) {
             thickness="1px"
             variant="h"
             length="100%"
-            color="lightgrey"
+            color="var(--neutral-400)"
           />
         </UICore.Flex>
       );
