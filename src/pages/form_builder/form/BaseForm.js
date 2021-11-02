@@ -45,7 +45,7 @@ export default function BaseForm({ form, triggerRender }) {
             helper={errors?.name}
             label="Name"
             onChange={handleChange}
-            defaultValue={form.getModel().name}
+            value={form.getModel().name}
             mb="16px"
             width="140px"
           />
@@ -53,7 +53,7 @@ export default function BaseForm({ form, triggerRender }) {
             name="published"
             label="Published"
             onChange={handleChange}
-            defaultChecked={form.getModel().published}
+            checked={form.getModel().published}
             mb="16px"
             width="140px"
           />
@@ -63,7 +63,7 @@ export default function BaseForm({ form, triggerRender }) {
             helper={errors.header_foreground}
             label="Header Text"
             onChange={handleChange}
-            defaultValue={form.getModel().header_foreground}
+            value={form.getModel().header_foreground}
             mb="16px"
             width="100px"
           />
@@ -72,7 +72,7 @@ export default function BaseForm({ form, triggerRender }) {
             helper={errors.header_background}
             label="Header Base"
             onChange={handleChange}
-            defaultValue={form.getModel().header_background}
+            value={form.getModel().header_background}
             mb="16px"
             width="100px"
           />
@@ -81,7 +81,7 @@ export default function BaseForm({ form, triggerRender }) {
             helper={errors.body_foreground}
             label="Form Text"
             onChange={handleChange}
-            defaultValue={form.getModel().body_foreground}
+            value={form.getModel().body_foreground}
             mb="16px"
             width="100px"
           />
@@ -90,7 +90,7 @@ export default function BaseForm({ form, triggerRender }) {
             helper={errors.body_background}
             label="Form Base"
             onChange={handleChange}
-            defaultValue={form.getModel().body_background}
+            value={form.getModel().body_background}
             mb="16px"
             width="100px"
           />
@@ -99,7 +99,7 @@ export default function BaseForm({ form, triggerRender }) {
             helper={errors.controls_foreground}
             label="Control Color"
             onChange={handleChange}
-            defaultValue={form.getModel().controls_foreground}
+            value={form.getModel().controls_foreground}
             mb="16px"
             width="100px"
           />
@@ -109,7 +109,7 @@ export default function BaseForm({ form, triggerRender }) {
             helper={errors.controls_background}
             label="Control Base"
             onChange={handleChange}
-            defaultValue={form.getModel().controls_background}
+            value={form.getModel().controls_background}
             mb="16px"
             width="100px"
           />
@@ -118,7 +118,7 @@ export default function BaseForm({ form, triggerRender }) {
             helper={errors.page_background}
             label="Page Base"
             onChange={handleChange}
-            defaultValue={form.getModel().page_background}
+            value={form.getModel().page_background}
             mb="48px"
             width="100px"
           />
