@@ -17,6 +17,18 @@ export default function Toolbar({
   const [toolWidth, setToolWidth] = useState("100%");
   const { user, endSession } = useContext(SessionContext);
 
+  function Preview() {
+    let previewWindow = window.open(
+      "http://localhost:3000/preview",
+      form.getModel().name
+    );
+
+    previewWindow.postMessage(
+      JSON.stringify(form.getModel()),
+      "http://localhost:3000/preview"
+    );
+  }
+
   useEffect(() => {
     let parent = document.getElementById("canvas-list-area");
     if (parent) {
@@ -277,6 +289,7 @@ export default function Toolbar({
               hover="#FFFFFF"
               variant="outline"
               color="#FFF"
+              onClick={() => Preview()}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

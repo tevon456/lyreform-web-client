@@ -60,9 +60,30 @@ export default function DashboardTable({ columns = [], data = [] }) {
                 </UICore.Badge>
               </td>
 
-              <td>{data.length}</td>
+              <td>{item["fields"].length}</td>
               <td>
                 <UICore.Flex>
+                  <UICore.Box
+                    mg="0px"
+                    aria-label="Responses"
+                    data-balloon-pos="down"
+                    as="button"
+                    onClick={() => {
+                      // history.push("/builder", { formId: item["uuid"] });
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      width="24px"
+                      height="24px"
+                    >
+                      <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z" />
+                      <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+                    </svg>
+                  </UICore.Box>
                   <UICore.Box
                     mg="0px"
                     aria-label="Edit"
