@@ -3,7 +3,7 @@ export default class Lyreform {
   #id = null;
   #model = {
     name: "New Form",
-    logo_url: `https://dummyimage.com/400x400/3052a6/fff.png&text=logo`,
+    logo_url: "",
     published: false,
     header_foreground: "#ffffff",
     header_background: "#2035BD",
