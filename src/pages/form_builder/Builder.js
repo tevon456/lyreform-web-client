@@ -26,7 +26,7 @@ export function Builder() {
 
   useEffect(() => {
     console.log("Builder: ", form);
-    if (location.state?.formId) {
+    if (location.state?.formId && initial === false) {
       Api.getForm(location.state?.formId)
         .then((res) => {
           setData(res.data);
