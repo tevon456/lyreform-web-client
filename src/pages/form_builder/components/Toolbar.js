@@ -16,17 +16,12 @@ export default function Toolbar({
   const size = useWindowSize();
   const [toolWidth, setToolWidth] = useState("100%");
   const { user, endSession } = useContext(SessionContext);
+  const origin = "https://live.lyreform.com/preview";
 
   function Preview() {
-    let previewWindow = window.open(
-      "http://localhost:3000/preview",
-      form.getModel().name
-    );
+    let previewWindow = window.open(origin, form.getModel().name);
 
-    previewWindow.postMessage(
-      JSON.stringify(form.getModel()),
-      "http://localhost:3000/preview"
-    );
+    previewWindow.postMessage(JSON.stringify(form.getModel()), origin);
   }
 
   useEffect(() => {
