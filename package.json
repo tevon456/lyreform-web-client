@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "api": "cd ../../../Desktop/lyreform-api-postgress/ && npm run dev"
+    "api": "cd ../lyreform-api-postgres/ && npm run dev"
   },
   "eslintConfig": {
     "extends": "react-app"
