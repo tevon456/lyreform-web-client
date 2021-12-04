@@ -1,6 +1,6 @@
 import { Api } from "../../utils";
 import React, { useEffect } from "react";
-import { UICore } from "../../components";
+import { Content, UICore } from "../../components";
 import DashboardTable from "./components/DashboardTable";
 import { useRestResponse } from "../../hooks";
 
@@ -8,10 +8,15 @@ export default function Home() {
   return (
     <UICore.Page>
       <UICore.Text weight="500" size="lg">
-        Forms
+        Home
       </UICore.Text>
-
-      <Table />
+      <UICore.Box pd="12px" />
+      <Content.Card>
+        <UICore.Text mt="6px" mb="6px" weight="400" size="md">
+          Forms
+        </UICore.Text>
+        <Table />
+      </Content.Card>
     </UICore.Page>
   );
 }
