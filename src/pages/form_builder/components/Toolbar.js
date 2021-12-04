@@ -20,7 +20,6 @@ export default function Toolbar({
 
   function Preview() {
     let previewWindow = window.open(origin, form.getModel().name);
-
     previewWindow.postMessage(JSON.stringify(form.getModel()), origin);
   }
 
