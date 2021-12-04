@@ -5,7 +5,7 @@ export default function Card({ width, height, children, ...rest }) {
   return (
     <UICore.Box
       border="1px solid var(--neutral-350)"
-      mg="12px"
+      mg="0px"
       pd="var(--space-xs)"
       radius="4px"
       bg="var(--neutral-100)"
