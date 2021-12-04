@@ -12,25 +12,14 @@ export default function App() {
   const { hasValidSession, user, endSession } = useContext(SessionContext);
   const links = hasValidSession()
     ? [
+        { type: "link", to: "/", text: "Home" },
+        { type: "link", to: "/templates", text: "Templates" },
+        { type: "link", to: "/inbox", text: "Inbox" },
         {
-          type: "buttonPrimary",
+          type: "buttonSecondary",
           to: "/builder",
           text: (
             <>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                width="24px"
-                height="24px"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                  clipRule="evenodd"
-                />
-              </svg>{" "}
               <span>New Form</span>
             </>
           ),
