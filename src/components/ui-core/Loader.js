@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { UICore } from "..";
+import Flex from "./Flex";
 import Logo from "../../resources/icons/logo";
 
 const Frames = keyframes`
@@ -32,11 +32,11 @@ const Inner = styled.div`
 
 export default function Loader() {
   return (
-    <UICore.Flex justify="center" align="center" direction="column">
+    <Flex justify="center" align="center" direction="column">
       <Logo width="28px" height="28px" colorA="#2c2c34" colorB="#2c2c34" />
       <Outer>
         <Inner />
       </Outer>
-    </UICore.Flex>
+    </Flex>
   );
 }
