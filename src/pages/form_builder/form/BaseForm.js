@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import Input from "../components/Input";
@@ -19,8 +19,12 @@ const schema = yup.object().shape({
 });
 
 export default function BaseForm({ form, triggerRender }) {
+  useEffect(() => {
+    //
+  }, [form]);
   return (
     <Formik
+      enableReinitialize
       initialValues={{
         name: form.getModel().name,
         published: form.getModel().published,
