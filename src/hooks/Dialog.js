@@ -32,7 +32,7 @@ function DialogInner(props) {
   return (
     <UICore.Box bg="#fff" radius="4px" pd="0px" pb="6px">
       <UICore.Box
-        bg="var(--neutral-500)"
+        bg="var(--neutral-200)"
         mg="0px"
         radius="4px 4px 0px 0px"
         pd="12px"
@@ -40,7 +40,7 @@ function DialogInner(props) {
         <UICore.Flex justify="space-between" align="center">
           <UICore.Text
             mt="0px"
-            color="var(--text-light)"
+            color="var(--text-dark)"
             weight="400"
             className="margin-top--none margin-bottom--none"
           >
@@ -68,7 +68,7 @@ function DialogInner(props) {
                 className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="var(--text-light)"
+                stroke="var(--text-dark)"
                 width="24px"
                 height="24px"
               >
