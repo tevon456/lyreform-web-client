@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { UICore } from "../../../components/";
 import { HexColorPicker } from "react-colorful";
 import chroma from "chroma-js";
@@ -74,7 +74,8 @@ const ColorInput = ({
             content={<HexColorPicker color={color} onChange={handleChange} />}
           >
             <StyledInput
-              color={rest.value || color}
+              ref={ref}
+              color={ref?.current?.value || rest.value}
               disabled={disabled}
               border={valid ? "rgba(169, 167, 167, 0.43)" : "red"}
               {...rest}
@@ -85,7 +86,6 @@ const ColorInput = ({
               onBlur={(e) => {
                 onChange(e);
               }}
-              ref={ref}
             />
           </Tippy>
 
