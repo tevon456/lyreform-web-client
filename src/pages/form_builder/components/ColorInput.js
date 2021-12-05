@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { UICore } from "../../../components/";
 import { HexColorPicker } from "react-colorful";
 import chroma from "chroma-js";
@@ -46,7 +46,7 @@ const ColorInput = ({
   ...rest
 }) => {
   const ref = useRef();
-  const [color, setColor] = useState(rest.value || defaultValue || "#fff");
+  const [color, setColor] = useState(rest.value || "#fff");
   const [valid, setValid] = useState(true);
 
   const handleChange = (e) => {
@@ -74,7 +74,7 @@ const ColorInput = ({
             content={<HexColorPicker color={color} onChange={handleChange} />}
           >
             <StyledInput
-              color={color}
+              color={rest.value || color}
               disabled={disabled}
               border={valid ? "rgba(169, 167, 167, 0.43)" : "red"}
               {...rest}
