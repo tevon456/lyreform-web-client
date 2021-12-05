@@ -25,9 +25,8 @@ export function Builder() {
   };
 
   useEffect(() => {
-    console.log("Builder: ", form);
     if (location.state?.formId && initial === false) {
-      Api.getForm(location.state?.formId)
+      Api.getForm(location.state?.formId) //TODO allow loading id from url param
         .then((res) => {
           setData(res.data);
           setInitial(true);
@@ -45,7 +44,7 @@ export function Builder() {
   if (data && initial === false) {
     // form hasn't loaded before so load it onto the model
     form.setIdFromBackend(data.uuid);
-    form.loadSchema(data);
+    form.loadSchema({ ...data });
   }
 
   return (
