@@ -7,7 +7,7 @@ import { Integrations } from "@sentry/tracing";
 
 Sentry.init({
   dsn: "https://3b0c5ce555924264ac5cbca1e7e18d00@o309617.ingest.sentry.io/5638355",
-  release: "my-project-name@" + process.env.npm_package_version,
+  release: "lyreform@" + process.env.npm_package_version,
   integrations: [new Integrations.BrowserTracing()],
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
