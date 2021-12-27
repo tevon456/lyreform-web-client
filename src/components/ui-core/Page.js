@@ -24,75 +24,55 @@ const device = {
   desktopL: `(max-width: ${size.desktop})`,
 };
 
+const Main = styled.main`
+  padding-bottom: var(--space-md);
+
+  @media ${device.desktopL} {
+    padding-top: var(--space-xxl);
+    padding-bottom: var(--space-xxl);
+    padding-left: var(--space-xxxl);
+    padding-right: var(--space-xxxl);
+  }
+
+  @media ${device.desktop} {
+    padding-top: var(--space-xxl);
+    padding-bottom: var(--space-xxl);
+    padding-left: var(--space-xxxl);
+    padding-right: var(--space-xxxl);
+  }
+
+  @media ${device.laptop} {
+    padding-top: var(--space-xxl);
+    padding-bottom: var(--space-xxl);
+    padding-left: var(--space-xxl);
+    padding-right: var(--space-xxl);
+  }
+
+  @media ${device.tablet} {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  @media ${device.mobileL} {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+`;
+
 /**
  * Used as parent for Page Components.
- * @prop {boolean} padding: Enable or disable responsive padding
+ * @prop {string} className: css class
  */
-function Page({ background, ...props }) {
-  let xxxl = "var(--space-xxxl)";
-  let xxl = "var(--space-xxl)";
-  let md = "var(--space-md)";
-  let sm = "var(--space-sm)";
-
-  if (props.padding === false) {
-    sm = "var(--space-xs)";
-    md = "var(--space-xs)";
-    xxl = "var(--space-xs)";
-    xxxl = "var(--space-xs)";
-  }
-
-  const Content = styled.main`
-    padding-bottom: var(--space-md);
-
-    @media ${device.desktopL} {
-      padding-top: var(--space-xxl);
-      padding-bottom: var(--space-xxl);
-      padding-left: ${xxxl};
-      padding-right: ${xxxl};
-    }
-
-    @media ${device.desktop} {
-      padding-top: var(--space-xxl);
-      padding-bottom: var(--space-xxl);
-      padding-left: calc(${xxxl});
-      padding-right: calc(${xxxl});
-    }
-
-    @media ${device.laptop} {
-      padding-top: var(--space-xxl);
-      padding-bottom: var(--space-xxl);
-      padding-left: ${xxl};
-      padding-right: ${xxl};
-    }
-
-    @media ${device.tablet} {
-      padding-top: var(--space-xl);
-      padding-bottom: var(--space-xl);
-      padding-left: ${md};
-      padding-right: ${md};
-    }
-
-    @media ${device.mobileL} {
-      padding-top: var(--space-xl);
-      padding-bottom: var(--space-xl);
-      padding-left: ${sm};
-      padding-right: ${sm};
-    }
-  `;
-
-  if (window.top === window.self) {
-    return (
-      <Content id="page" className={props.className} {...props}>
-        {props.children}
-      </Content>
-    );
-  } else {
-    return (
-      <Content id="page" className={props.className} {...props}>
-        {props.children}
-      </Content>
-    );
-  }
+function Page({ children, className, background, ...rest }) {
+  return (
+    <Main id="page" className={className} {...rest}>
+      {children}
+    </Main>
+  );
 }
 
 export default Page;
