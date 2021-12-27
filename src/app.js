@@ -14,7 +14,6 @@ export default function App() {
     ? [
         { type: "link", to: "/", text: "Home" },
         { type: "link", to: "/templates", text: "Templates" },
-        { type: "link", to: "/inbox", text: "Inbox" },
         {
           type: "buttonSecondary",
           to: "/builder",
