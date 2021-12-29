@@ -1,35 +1,18 @@
 import { Api } from "../../utils";
 import React, { useEffect } from "react";
 import { Content, UICore } from "../../components";
-import DashboardTable from "./components/DashboardTable";
 import { useRestResponse } from "../../hooks";
+import DashboardTable from "./components/DashboardTable";
+import "styled-components/macro";
 
 export default function Home() {
-  return (
-    <UICore.Page>
-      <UICore.Text weight="500" size="lg">
-        Home
-      </UICore.Text>
-      <UICore.Box pd="12px" />
-      <Content.Card>
-        <UICore.Text mt="6px" mb="6px" weight="400" size="md">
-          Forms
-        </UICore.Text>
-        <Table />
-      </Content.Card>
-    </UICore.Page>
-  );
-}
-
-function Table() {
   let { loading, setLoading, data, setData, error, setError } = useRestResponse(
     []
   );
-
   useEffect(() => {
     Api.getAllForms()
       .then((res) => {
-        setData(res.data.results);
+        setData(res.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -38,10 +21,26 @@ function Table() {
       });
     // eslint-disable-next-line
   }, [loading]);
+
+  return (
+    <UICore.Page>
+      <UICore.Text weight="500" size="lg">
+        Home
+      </UICore.Text>
+      <Content.Card>
+        <Table loading={loading} data={data?.results} error={error} />
+      </Content.Card>
+    </UICore.Page>
+  );
+}
+
+function Table({ error, loading, data }) {
   if (loading)
     return (
       <UICore.Flex align="center" justify="center">
-        <UICore.Text>...loading</UICore.Text>
+        <UICore.Text>
+          <UICore.Loader />
+        </UICore.Text>
       </UICore.Flex>
     );
   if (error)
@@ -52,7 +51,7 @@ function Table() {
     );
   return (
     <DashboardTable
-      columns={["Title", "Status", "Fields", "Actions"]}
+      columns={["Title", "Status", "Responses", "Actions"]}
       data={data}
     />
   );

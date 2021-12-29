@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import { UICore } from "../../../components";
 import { useDialog } from "../../../hooks";
-import { Api, Notification } from "../../../utils/";
+import { Api, Notification } from "../../../utils";
 export default function DashboardTable({ columns = [], data = [] }) {
   const history = useHistory();
   const [formUUID, setFormUUID] = useState(null);
