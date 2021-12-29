@@ -12,8 +12,6 @@ export default function App() {
   const { hasValidSession, user, endSession } = useContext(SessionContext);
   const links = hasValidSession()
     ? [
-        { type: "link", to: "/", text: "Home" },
-        { type: "link", to: "/templates", text: "Templates" },
         {
           type: "buttonSecondary",
           to: "/builder",
@@ -49,11 +47,7 @@ const UserAvatarMenu = ({ user, logout = () => {} }) => {
       <Content.DropDown
         width="180px"
         items={[
-          { type: "action", text: "Settings" },
-          { type: "action", text: "Help" },
-          { type: "line" },
-          { type: "action", text: "Upgrade" },
-          { type: "action", text: "Billing" },
+          { type: "action", text: "Account" },
           { type: "line" },
           {
             type: "action",
