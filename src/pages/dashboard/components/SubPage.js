@@ -26,6 +26,7 @@ const device = {
 
 const Main = styled.main`
   padding-bottom: var(--space-md);
+  margin-left: 16px;
 
   @media ${device.desktopL} {
     padding-top: var(--space-xxl);
