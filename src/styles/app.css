@@ -61,3 +61,8 @@ a:visited {
   font-weight: 500;
   margin-top: 2px;
 }
+
+.sideBarActive > div {
+  background: #eaeffb;
+  color: var(--primary) !important;
+}
