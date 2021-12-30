@@ -1,7 +1,10 @@
 import { Icons, UICore } from "../../components";
 import "styled-components/macro";
-import { Link, Route, Switch } from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 import Home from "./Home";
+import Templates from "./Templates";
+import DashboardNotFound from "./NotFound";
+import Inbox from "./Inbox";
 
 export default function Dashboard() {
   return (
@@ -18,6 +21,7 @@ export default function Dashboard() {
       >
         <UICore.Box mg="0px" mt="60px">
           <SideBarLink
+            exact={true}
             icon={Icons.HomeIcon({ width: "20px", height: "20px" })}
             to="/dashboard"
             text="Home"
@@ -25,17 +29,20 @@ export default function Dashboard() {
           <SideBarLink
             icon={Icons.InboxIcon({ width: "20px", height: "20px" })}
             to="/dashboard/inbox"
-            text="Inbox"
+            text="Response Inbox"
           />
           <SideBarLink
-            icon={Icons.HomeIcon({ width: "20px", height: "20px" })}
-            to="/dashboard"
+            icon={Icons.FolderIcon({ width: "20px", height: "20px" })}
+            to="/dashboard/templates"
             text="Templates"
           />
           <SideBarLink
-            icon={Icons.CogIcon({ width: "20px", height: "20px" })}
-            to="/dashboard"
-            text="Settings"
+            icon={Icons.QuestionMarkCircleIcon({
+              width: "20px",
+              height: "20px",
+            })}
+            to="/dashboard/help"
+            text="Help"
           />
         </UICore.Box>
       </UICore.Box>
@@ -56,16 +63,18 @@ function Routes() {
   return (
     <Switch>
       <Route exact path="/dashboard" component={Home} />
-      <Route exact path="/dashboard/inbox" component={Home} />
-      <Route exact path="/dashboard/templates" component={Home} />
+      <Route exact path="/dashboard/inbox" component={Inbox} />
+      <Route exact path="/dashboard/templates" component={Templates} />
+      <Route component={DashboardNotFound} />
     </Switch>
   );
 }
 
-function SideBarLink({ icon, to, text, ...rest }) {
+function SideBarLink({ exact, icon, to, text, ...rest }) {
   return (
-    <span
+    <div
       css={`
+        margin-bottom: 4px;
         & > a:focus {
           box-shadow: none;
           background: var(--neutral-200);
@@ -84,8 +93,8 @@ function SideBarLink({ icon, to, text, ...rest }) {
         }
       `}
     >
-      <Link to={to}>
-        <div css={``}>
+      <NavLink activeClassName="sideBarActive" exact={exact} to={to}>
+        <div>
           <UICore.Flex align="center">
             {icon || null}
             <UICore.Space amount={2} />
@@ -94,7 +103,7 @@ function SideBarLink({ icon, to, text, ...rest }) {
             </UICore.Text>
           </UICore.Flex>
         </div>
-      </Link>
-    </span>
+      </NavLink>
+    </div>
   );
 }
