@@ -5,6 +5,7 @@ import useOnClickOutside from "./useOnClickOutside";
 import useKeyPress from "./useKeyPress";
 import useNavbar from "./useNavbar";
 import useDialog from "./useDialog";
+import useRender from "./useRender";
 // import useLockBodyScroll from "./useLockBodyScroll";
 // import useInput from "./useInput";
 
@@ -16,6 +17,7 @@ export {
   useRestResponse,
   useKeyPress,
   useDialog,
+  useRender,
   //   useLockBodyScroll,
   //   useInput,
 };
