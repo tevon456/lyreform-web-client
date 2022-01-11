@@ -19,7 +19,7 @@ Typography
   --font-3: "Kanit", sans-serif;
 
   --font-primary: var(--font-3);
-  --font-secondary: var(--font-3);
+  --font-secondary: var(--font-1);
   --font-fallback: var(--font-primary);
 
   --color-link: var(--accent-color-darker);
