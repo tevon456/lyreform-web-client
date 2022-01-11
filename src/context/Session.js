@@ -37,7 +37,7 @@ function SessionProvider({ children }) {
     const timeToExpiration = Math.floor(
       (tokenExpiration - currentTime) / 60000
     );
-    // console.log("session expires ", timeToExpiration, " minutes");
+    console.log("session expires in ", timeToExpiration, " minutes");
 
     return { time: timeToExpiration, tokens };
   };
@@ -55,7 +55,7 @@ function SessionProvider({ children }) {
 
   const refreshSession = () => {
     const result = calculateTimeToExpiration();
-    if (result.time <= 30) {
+    if (result.time <= 15) {
       Api.refreshToken(Auth.getToken().refresh)
         .then((res) => {
           Auth.storeToken(res.data.tokens);

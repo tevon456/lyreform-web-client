@@ -1,4 +1,5 @@
 import jwt_decode from "jwt-decode";
+import { Api } from ".";
 
 export class Auth {
   /**
@@ -46,10 +47,20 @@ export class Auth {
    * @returns {object}
    */
   static getToken() {
-    return {
-      access: localStorage.getItem("access"),
-      refresh: localStorage.getItem("refresh"),
-    };
+    if (this.isValidToken(localStorage.getItem("access"))) {
+      return {
+        access: localStorage.getItem("access"),
+        refresh: localStorage.getItem("refresh"),
+      };
+    } else {
+      Api.refreshToken(this.getToken().refresh)
+        .then((res) => {
+          Auth.storeToken(res.data.tokens);
+        })
+        .catch(() => {
+          Auth.deauthenticateUser();
+        });
+    }
   }
 
   /**
