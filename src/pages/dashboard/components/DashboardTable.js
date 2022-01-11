@@ -70,7 +70,10 @@ export default function DashboardTable({ columns = [], data = [] }) {
                     <UICore.Button
                       size="sm"
                       onClick={() => {
-                        // history.push("/builder", { formId: item["uuid"] });
+                        window.open(
+                          `https://live.lyreform.com/${item["uuid"]}`,
+                          "_blank"
+                        );
                       }}
                     >
                       Open
