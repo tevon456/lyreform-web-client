@@ -131,7 +131,7 @@ export class Api {
    */
   static async getFormSubmissions(id) {
     if (id) {
-      const res = await axios.get(`/form/${id}/submissions`);
+      const res = await axios.get(`/submission/?formId=${id}`);
       return res;
     }
   }
