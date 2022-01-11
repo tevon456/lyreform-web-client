@@ -188,6 +188,7 @@ function MainPanel({ activeId, responses }) {
 
   useEffect(() => {
     setActiveDetails(utility.selectField(responses, "id", activeId)[0]);
+    // eslint-disable-next-line
   }, [activeId]);
 
   useEffect(() => {
