@@ -42,7 +42,8 @@ function DialogInner({ name, close, width, height, children }) {
           <UICore.Text
             mt="0px"
             color="var(--text-dark)"
-            weight="400"
+            weight="500"
+            size="md"
             className="margin-top--none margin-bottom--none"
           >
             {name}
@@ -50,16 +51,10 @@ function DialogInner({ name, close, width, height, children }) {
           <UICore.Button
             width="40px"
             height="30px"
-            bg="transparent"
+            kind="secondary"
             autoFocus
             mg="0px"
             pd="0px"
-            css={`
-              color: green;
-              focus {
-                outline: 2px solid black;
-              }
-            `}
             data-cy="close-dialog"
             onClick={() => close()}
           >
@@ -69,7 +64,7 @@ function DialogInner({ name, close, width, height, children }) {
                 className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="var(--text-dark)"
+                stroke="var(--text-light)"
                 width="24px"
                 height="24px"
               >
