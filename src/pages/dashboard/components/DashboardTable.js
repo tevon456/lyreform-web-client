@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { UICore } from "../../../components";
+import { UICore, Content } from "../../../components";
 import { useDialog } from "../../../hooks";
 import { Api, Notification } from "../../../utils";
 export default function DashboardTable({ columns = [], data = [] }) {
@@ -76,34 +76,56 @@ export default function DashboardTable({ columns = [], data = [] }) {
                         );
                       }}
                     >
-                      Open
+                      View{" "}
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        class="css-i6dzq1"
+                      >
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                      </svg>
                     </UICore.Button>
                   </UICore.Box>
-                  <UICore.Box mg="0px">
-                    <UICore.Button
-                      onClick={() => {
-                        history.push("/builder", { formId: item["uuid"] });
-                      }}
-                      size="sm"
-                      variant="outline"
-                      kind="secondary"
-                    >
-                      Edit
-                    </UICore.Button>
-                  </UICore.Box>
-                  <UICore.Box mg="0px">
-                    <UICore.Button
-                      onClick={() => {
-                        setFormUUID(item["uuid"]);
-                        toggleDelete();
-                      }}
-                      size="sm"
-                      kind="secondary"
-                      variant="outline"
-                    >
-                      Delete
-                    </UICore.Button>
-                  </UICore.Box>
+                  <Content.DropDown
+                    width="180px"
+                    items={[
+                      {
+                        type: "action",
+                        text: "Edit",
+                        onClick: () => {
+                          history.push("/builder", { formId: item["uuid"] });
+                        },
+                      },
+                      {
+                        type: "action",
+                        text: "Delete",
+                        color: "red",
+                        onClick: () => {
+                          setFormUUID(item["uuid"]);
+                          toggleDelete();
+                        },
+                      },
+                    ]}
+                    x="0px"
+                    y="12px"
+                  >
+                    <UICore.Box mg="0px">
+                      <UICore.Button
+                        size="sm"
+                        variant="outline"
+                        kind="secondary"
+                      >
+                        More
+                      </UICore.Button>
+                    </UICore.Box>
+                  </Content.DropDown>
                 </UICore.Flex>
               </td>
             </tr>
