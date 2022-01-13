@@ -94,7 +94,7 @@ function SidePanel({
     >
       <UICore.Flex direction="column">
         <UICore.Box
-          width="200px"
+          width="220px"
           border="1px solid var(--neutral-400)"
           br="none"
           mg="0px"
@@ -132,8 +132,11 @@ function SidePanel({
           </UICore.Flex>
         </UICore.Box>
         <UICore.Box
+          height
           css={`
             flex-grow: 1;
+            overflow-y: auto;
+            height: calc(100vh - 140px);
           `}
         >
           {responses.map((response) => (
@@ -142,20 +145,25 @@ function SidePanel({
               css={`
                 margin-bottom: 4px;
                 border-radius: 4px;
-                &:hover {
-                  box-shadow: 0 0 0px 1px var(--primary);
-                }
               `}
             >
               <UICore.Box
-                bg={activeId === response.id ? "#0066f5" : "var(--neutral-100)"}
+                bg={
+                  activeId === response.id
+                    ? "var(--primary)"
+                    : "var(--neutral-100)"
+                }
                 color={activeId === response.id ? "#fff" : "var(--text-dark)"}
                 onClick={() => setActiveId(response?.id)}
                 radius="4px"
                 pd="4px"
+                mb="2px"
                 css={`
                   cursor: pointer;
                   font-family: var(--font-secondary), var(--font-fallback);
+                  &:hover {
+                    box-shadow: 0 0 0px 2px var(--primary);
+                  }
                 `}
               >
                 <UICore.Text mb="2px" mt="6px" weight="600" color="inherit">
@@ -181,9 +189,8 @@ function SidePanel({
 }
 
 function MainPanel({ activeId, responses }) {
-  const [activeDetails, setActiveDetails] = useState();
+  let [activeDetails, setActiveDetails] = useState();
   let [responseKeys, setResponseKeys] = useState();
-
   let utility = new Lyreform().util;
 
   useEffect(() => {
@@ -212,9 +219,10 @@ function MainPanel({ activeId, responses }) {
           bg="var(--neutral-100)"
           border="1px solid var(--neutral-400)"
           bl="none"
+          minHeight="33px"
         >
           <UICore.Flex align="center" justify="flex-end">
-            <UICore.Button>New Form</UICore.Button>
+            {/* <UICore.Button>New Form</UICore.Button> */}
           </UICore.Flex>
         </UICore.Box>
         <UICore.Box
