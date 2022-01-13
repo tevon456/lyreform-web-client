@@ -4,22 +4,23 @@ import styled from "styled-components";
 import useOnClickOutside from "./useOnClickOutside";
 import { UICore } from "../components";
 
-function Dialog(props) {
+function Dialog({ open, close, name, width, height, children, blur, rest }) {
   const ref = useRef();
-  useOnClickOutside(ref, () => props.close() || null);
+  useOnClickOutside(ref, () => close() || null);
 
-  if (!props.open) return null;
+  if (!open) return null;
   return ReactDOM.createPortal(
     <div>
-      <DialogBackground blur={props.blur}>
+      <DialogBackground blur={blur}>
         <div ref={ref}>
           <DialogInner
-            name={props.name}
+            name={name}
+            width={width}
+            height={height}
             minWidth="300px"
-            close={props.close}
-            {...props}
+            close={close}
           >
-            {props.children}
+            {children}
           </DialogInner>
         </div>
       </DialogBackground>
@@ -28,7 +29,7 @@ function Dialog(props) {
   );
 }
 
-function DialogInner(props) {
+function DialogInner({ name, close, width, height, children }) {
   return (
     <UICore.Box bg="#fff" radius="4px" pd="0px" pb="6px">
       <UICore.Box
@@ -44,7 +45,7 @@ function DialogInner(props) {
             weight="400"
             className="margin-top--none margin-bottom--none"
           >
-            {props.name}
+            {name}
           </UICore.Text>
           <UICore.Button
             width="40px"
@@ -60,7 +61,7 @@ function DialogInner(props) {
               }
             `}
             data-cy="close-dialog"
-            onClick={() => props.close()}
+            onClick={() => close()}
           >
             <UICore.Flex align="center" justify="center">
               <svg
@@ -100,15 +101,15 @@ function DialogInner(props) {
             background: #767676;
           }
         `}
-        width={props.width}
-        height={props.height || "max-content"}
+        width={width}
+        height={height || "max-content"}
         minWidth="300px"
-        maxWidth={props.width || "max-content"}
+        maxWidth={width || "max-content"}
         maxHeight="70vh"
         mg="8px"
         style={{ overflowY: "auto", overflowX: "hidden" }}
       >
-        {props.children}
+        {children}
       </UICore.Box>
     </UICore.Box>
   );
@@ -121,7 +122,7 @@ const DialogBackground = styled.div`
   width: 100vw;
   height: 100vh;
   background: rgb(0 0 0 / 50%);
-  backdrop-filter: blur(${(props) => props.blur || "8px"});
+  backdrop-filter: blur(8px);
   top: 0px;
   left: 0px;
   position: fixed;
