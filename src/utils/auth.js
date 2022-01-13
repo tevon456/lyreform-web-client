@@ -46,17 +46,10 @@ export class Auth {
    * @returns {object}
    */
   static getToken() {
-    if (this.isValidToken(localStorage.getItem("access"))) {
-      return {
-        access: localStorage.getItem("access"),
-        refresh: localStorage.getItem("refresh"),
-      };
-    } else {
-      return {
-        access: localStorage.getItem("access"),
-        refresh: localStorage.getItem("refresh"),
-      };
-    }
+    return {
+      access: localStorage.getItem("access"),
+      refresh: localStorage.getItem("refresh"),
+    };
   }
 
   /**
@@ -78,6 +71,8 @@ export class Auth {
    *
    */
   static storeToken(token) {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
     localStorage.setItem("access", token.access.token);
     localStorage.setItem("refresh", token.refresh.token);
   }
