@@ -33,11 +33,15 @@ export default function LoginForm() {
         createSession(res.data.tokens);
       })
       .catch((error) => {
-        if (error.response.status === 429) {
+        if (error.response?.status === 429) {
           Notification.warning("Too many request, please try agin later");
         }
         if (error.response) {
           Notification.danger(error.response.data.message);
+        } else {
+          Notification.danger(
+            "We're having an issue logging into your account please try again later"
+          );
         }
       });
   };
