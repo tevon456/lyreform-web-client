@@ -1,6 +1,7 @@
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import React, { useContext } from "react";
 import { SessionContext } from "../context/Session";
+import Navigate from "./Navigate";
 
 /**
  * Redirects to login if user is unauthenticated
@@ -20,7 +21,7 @@ export default function SessionRoute({
       {...rest}
       render={(props) => {
         return hasValidSession() ? (
-          <Redirect to={redirectTo} />
+          <Navigate to={redirectTo} />
         ) : (
           <Page {...props} />
         );

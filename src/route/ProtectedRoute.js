@@ -1,6 +1,7 @@
-import { Route, useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
 import React, { useContext } from "react";
 import { SessionContext } from "../context/Session";
+import Navigate from "./Navigate";
 
 /**
  * Redirects to login if user is unauthenticated
@@ -23,11 +24,5 @@ const ProtectedRoute = ({ component: Comp, path, ...rest }) => {
     />
   );
 };
-
-function Navigate({ to, rest }) {
-  const history = useHistory();
-  history.push(to);
-  return <></>;
-}
 
 export default ProtectedRoute;
