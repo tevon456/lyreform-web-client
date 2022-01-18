@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Content, Icons, UICore } from "../../components";
 import "styled-components/macro";
 import { Api, InboxUtil, Lyreform } from "../../utils";
-import { useRestResponse } from "../../hooks";
+import { useRender, useRestResponse } from "../../hooks";
 import { PanelMap } from "./components";
 
 export default function Inbox() {
@@ -13,6 +13,7 @@ export default function Inbox() {
     setData: setFormList,
   } = useRestResponse([]);
   const { data: responses, setData: setResponses } = useRestResponse([]);
+  const [watchResponse, refreshResponse] = useRender();
   const [currentForm, setCurrentForm] = useState();
   const [activeId, setActiveId] = useState();
 
@@ -48,14 +49,20 @@ export default function Inbox() {
           setCurrentForm={setCurrentForm}
           setActiveId={setActiveId}
           activeId={activeId}
+          watchResponse={watchResponse}
         />
-        <MainPanel activeId={activeId} responses={responses} />
+        <MainPanel
+          activeId={activeId}
+          responses={responses}
+          refreshResponse={refreshResponse}
+        />
       </UICore.Flex>
     </UICore.Box>
   );
 }
 
 function SidePanel({
+  watchResponse,
   activeId,
   responses = [],
   formList = [],
@@ -81,7 +88,7 @@ function SidePanel({
       })
       .catch((err) => {});
     // eslint-disable-next-line
-  }, [currentForm]);
+  }, [currentForm, watchResponse]);
 
   return (
     <UICore.Box
@@ -188,7 +195,7 @@ function SidePanel({
   );
 }
 
-function MainPanel({ activeId, responses }) {
+function MainPanel({ activeId, responses, refreshResponse }) {
   let [activeDetails, setActiveDetails] = useState();
   let [responseKeys, setResponseKeys] = useState();
   let utility = new Lyreform().util;
@@ -250,6 +257,7 @@ function MainPanel({ activeId, responses }) {
           `}
         >
           <PanelMap
+            refreshResponse={refreshResponse}
             responseKeys={responseKeys}
             data={activeDetails?.data}
             details={activeDetails}

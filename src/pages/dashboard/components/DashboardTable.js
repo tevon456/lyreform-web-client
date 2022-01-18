@@ -94,7 +94,7 @@ export default function DashboardTable({ columns = [], data = [] }) {
                     </UICore.Button>
                   </UICore.Box>
                   <Content.DropDown
-                    width="180px"
+                    width="100px"
                     items={[
                       {
                         type: "action",
@@ -113,8 +113,8 @@ export default function DashboardTable({ columns = [], data = [] }) {
                         },
                       },
                     ]}
-                    x="0px"
-                    y="12px"
+                    x="-46px"
+                    y="0px"
                   >
                     <UICore.Box mg="0px">
                       <UICore.Button
