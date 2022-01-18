@@ -2,12 +2,11 @@ import axios from "axios";
 import config from "./config";
 import { Auth } from "./auth";
 
-const tokens = Auth.getToken();
 axios.defaults.baseURL = config.API_URL;
 axios.defaults.headers.common = {
   "Content-Type": "application/json",
   "X-Requested-With": "XMLHttpRequest",
-  Authorization: `Bearer ${tokens.access}`,
+  Authorization: `Bearer ${Auth.getToken()?.access}`,
 };
 
 /**
@@ -181,10 +180,11 @@ export class Api {
   */
 
   /**
-   * Create a post submission
+   * Delete a form submission
+   * @param {string} id
    */
-  static async postSubmission(data, formId) {
-    const res = await axios.post("/submissions", { data, formId });
+  static async deleteSubmission(id) {
+    const res = await axios.delete(`/submissions/${id}`);
     return res;
   }
 
