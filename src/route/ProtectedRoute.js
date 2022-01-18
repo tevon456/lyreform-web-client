@@ -1,4 +1,4 @@
-import { Redirect, Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import React, { useContext } from "react";
 import { SessionContext } from "../context/Session";
 
@@ -17,11 +17,17 @@ const ProtectedRoute = ({ component: Comp, path, ...rest }) => {
         return hasValidSession() ? (
           <Comp {...props} />
         ) : (
-          <Redirect to="/login" />
+          <Navigate to="/login" />
         );
       }}
     />
   );
 };
+
+function Navigate({ to, rest }) {
+  const history = useHistory();
+  history.push(to);
+  return <></>;
+}
 
 export default ProtectedRoute;
