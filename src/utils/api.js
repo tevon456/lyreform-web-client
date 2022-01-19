@@ -1,13 +1,27 @@
 import axios from "axios";
+import { Auth } from ".";
 import config from "./config";
-import { Auth } from "./auth";
 
-axios.defaults.baseURL = config.API_URL;
-axios.defaults.headers.common = {
-  "Content-Type": "application/json",
-  "X-Requested-With": "XMLHttpRequest",
-  Authorization: `Bearer ${Auth.getToken()?.access}`,
-};
+const axios_api = axios.create({
+  baseURL: config.API_URL,
+  headers: {
+    "Content-Type": "application/json",
+    "X-Requested-With": "XMLHttpRequest",
+    Authorization: `Bearer ${localStorage.getItem("access")}`,
+  },
+});
+
+axios_api.interceptors.request.use(
+  (config) => {
+    const token = Auth.getToken()?.access;
+    console.log("interceptor ", Auth.getToken()?.access);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 /**
  * Contains all api call methods
@@ -28,7 +42,7 @@ export class Api {
    * @param {string} data.password - user password
    */
   static async signUp(data) {
-    const res = await axios.post("auth/register", data);
+    const res = await axios_api.post("auth/register", data);
     return res;
   }
 
@@ -37,7 +51,9 @@ export class Api {
    * @param {string} token - token sent to user email for verification
    */
   static async verifyAccount(token) {
-    const res = await axios.post(`auth/account-confirmation/?token=${token}`);
+    const res = await axios_api.post(
+      `auth/account-confirmation/?token=${token}`
+    );
     return res;
   }
 
@@ -46,7 +62,7 @@ export class Api {
    * @param {string} email
    */
   static async requestConfirmation(email) {
-    const res = await axios.post("auth/resend-confirmation", email);
+    const res = await axios_api.post("auth/resend-confirmation", email);
     return res;
   }
 
@@ -56,7 +72,7 @@ export class Api {
    * @param {string} data.password - user password
    */
   static async login(data) {
-    const res = await axios.post("auth/login", data);
+    const res = await axios_api.post("auth/login", data);
     return res;
   }
 
@@ -65,7 +81,7 @@ export class Api {
    * @param {string} refreshToken
    */
   static async refreshToken(refreshToken) {
-    const res = await axios.post("auth/refresh-tokens", { refreshToken });
+    const res = await axios_api.post("auth/refresh-tokens", { refreshToken });
     return res;
   }
 
@@ -74,7 +90,7 @@ export class Api {
    * @param refreshToken - token used to revoke user session
    */
   static async logout(refreshToken) {
-    const res = await axios.post("auth/logout", { refreshToken });
+    const res = await axios_api.post("auth/logout", { refreshToken });
     return res;
   }
 
@@ -83,7 +99,7 @@ export class Api {
    * @param {string} email
    */
   static async forgotPassword(email) {
-    const res = await axios.post("auth/forgot-password", { email });
+    const res = await axios_api.post("auth/forgot-password", { email });
     return res;
   }
 
@@ -93,7 +109,7 @@ export class Api {
    * @param {string} password
    */
   static async resetPassword(token, password) {
-    const res = await axios.post(`auth/reset-password?token=${token}`, {
+    const res = await axios_api.post(`auth/reset-password?token=${token}`, {
       password,
     });
     return res;
@@ -111,7 +127,7 @@ export class Api {
    * Retrieve all form that belong to the authenticated user
    */
   static async getAllForms() {
-    const res = await axios.get("/form");
+    const res = await axios_api.get("/form");
     return res;
   }
 
@@ -120,7 +136,7 @@ export class Api {
    */
   static async getForm(id) {
     if (id) {
-      const res = await axios.get(`/form/${id}`);
+      const res = await axios_api.get(`/form/${id}`);
       return res;
     }
   }
@@ -130,7 +146,7 @@ export class Api {
    */
   static async getFormSubmissions(id) {
     if (id) {
-      const res = await axios.get(`/submission/?formId=${id}`);
+      const res = await axios_api.get(`/submission/?formId=${id}`);
       return res;
     }
   }
@@ -143,7 +159,7 @@ export class Api {
       delete data.user;
       delete data.id;
     }
-    const res = await axios.post("/form", data);
+    const res = await axios_api.post("/form", data);
     return res;
   }
 
@@ -151,7 +167,7 @@ export class Api {
    * Delete a single form
    */
   static async deleteForm(id) {
-    const res = await axios({
+    const res = await axios_api({
       method: "delete",
       url: `/form/${id}`,
       data: { id },
@@ -167,7 +183,7 @@ export class Api {
       delete data.user;
       delete data.id;
     }
-    const res = await axios({ method: "patch", url: `/form/${id}`, data });
+    const res = await axios_api({ method: "patch", url: `/form/${id}`, data });
     return res;
   }
 
@@ -184,7 +200,7 @@ export class Api {
    * @param {string} id
    */
   static async deleteSubmission(id) {
-    const res = await axios.delete(`/submissions/${id}`);
+    const res = await axios_api.delete(`/submissions/${id}`);
     return res;
   }
 
@@ -200,7 +216,7 @@ export class Api {
    * Retrieve logged in User
    */
   static async getUser() {
-    const res = await axios.get("/user");
+    const res = await axios_api.get("/user");
     return res;
   }
 }
