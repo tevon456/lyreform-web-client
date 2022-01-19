@@ -36,13 +36,15 @@ export default function Home() {
           data={data?.results}
           error={error}
           render={render}
+          watch={watch}
         />
       </Content.Card>
     </SubPage>
   );
 }
 
-function Table({ error, loading, data, render }) {
+function Table({ error, loading, data, render, watch }) {
+  useEffect(() => {}, [watch]);
   if (loading)
     return (
       <UICore.Flex align="center" justify="center">
