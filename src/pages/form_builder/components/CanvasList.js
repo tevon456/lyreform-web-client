@@ -100,7 +100,6 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
                     <svg
                       style={{ marginRight: "8px" }}
                       xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-grip-vertical"
                       width="20px"
                       height="20px"
                       viewBox="0 0 24 24"
