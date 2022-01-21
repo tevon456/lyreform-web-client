@@ -86,7 +86,6 @@ export default function DashboardTable({ columns = [], data = [] }) {
                         fill="none"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        class="css-i6dzq1"
                       >
                         <line x1="7" y1="17" x2="17" y2="7"></line>
                         <polyline points="7 7 17 7 17 17"></polyline>
