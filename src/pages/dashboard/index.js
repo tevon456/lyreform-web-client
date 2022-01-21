@@ -64,6 +64,7 @@ function Routes() {
     <Switch>
       <Route exact path="/dashboard" component={Home} />
       <Route exact path="/dashboard/inbox" component={Inbox} />
+      <Route exact path="/dashboard/inbox/:form_id/" component={Inbox} />
       <Route exact path="/dashboard/templates" component={Templates} />
       <Route component={DashboardNotFound} />
     </Switch>
