@@ -48,9 +48,7 @@ function Table({ error, loading, data, render, watch }) {
   if (loading)
     return (
       <UICore.Flex align="center" justify="center">
-        <UICore.Text>
-          <UICore.Loader />
-        </UICore.Text>
+        <UICore.Loader />
       </UICore.Flex>
     );
   if (error)
