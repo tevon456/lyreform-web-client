@@ -4,6 +4,8 @@ import "styled-components/macro";
 import { Api, InboxUtil, Lyreform } from "../../utils";
 import { useRender, useRestResponse } from "../../hooks";
 import { PanelMap } from "./components";
+import ReactPaginate from "react-paginate";
+import { useHistory, useParams } from "react-router-dom";
 
 export default function Inbox() {
   const {
@@ -16,12 +18,26 @@ export default function Inbox() {
   const [watchResponse, refreshResponse] = useRender();
   const [currentForm, setCurrentForm] = useState();
   const [activeId, setActiveId] = useState();
+  const params = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     Api.getAllForms()
       .then((res) => {
         setFormList(res.data.results);
-        setCurrentForm(res.data.results[0]);
+        if (params.form_id) {
+          Api.getForm(params.form_id)
+            .then((res2) => {
+              setCurrentForm(res2.data);
+            })
+            .catch((err) => {
+              setCurrentForm(res.data.results[0]);
+            });
+        } else {
+          setCurrentForm(res.data.results[0]);
+          history.replace(`/dashboard/inbox/${res.data.results[0]?.uuid}`);
+        }
+
         setFormListLoading(false);
       })
       .catch((err) => {
@@ -71,8 +87,15 @@ function SidePanel({
   setResponses = () => {},
   setActiveId = () => {},
 }) {
+  const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const history = useHistory();
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected + 1);
+  };
+
   useEffect(() => {
-    Api.getFormSubmissions(currentForm?.uuid)
+    Api.getFormSubmissions(currentForm?.uuid, { limit: 10, page: currentPage })
       .then((res) => {
         if (res?.data?.results.length > 0) {
           setResponses(
@@ -82,13 +105,14 @@ function SidePanel({
               fieldType: "EMPTY",
             }).reverse()
           );
+          setPageCount(res.data.total_pages);
         } else {
           setResponses([]);
         }
       })
       .catch((err) => {});
     // eslint-disable-next-line
-  }, [currentForm, watchResponse]);
+  }, [currentForm, watchResponse, currentPage]);
 
   return (
     <UICore.Box
@@ -116,6 +140,7 @@ function SidePanel({
                   onClick: () => {
                     setCurrentForm(form);
                     setActiveId(null);
+                    history.replace(`/dashboard/inbox/${form.uuid}`);
                   },
                 };
               })}
@@ -139,11 +164,10 @@ function SidePanel({
           </UICore.Flex>
         </UICore.Box>
         <UICore.Box
-          height
           css={`
             flex-grow: 1;
             overflow-y: auto;
-            height: calc(100vh - 140px);
+            height: calc(100vh - 190px);
           `}
         >
           {responses.map((response) => (
@@ -189,6 +213,56 @@ function SidePanel({
               <div className="hl" />
             </div>
           ))}
+        </UICore.Box>
+        <UICore.Box pd="4px" width="220px" mg="0px">
+          <ReactPaginate
+            css={`
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              list-style-type: none;
+              padding: 0 4px;
+              li a {
+                background: #eaeffb;
+                color: var(--primary);
+                border-radius: 4px;
+                padding: 4px 0.8rem;
+                border: var(--primary) 1px solid;
+                cursor: pointer;
+              }
+              li.previous a,
+              li.next a,
+              li.break a {
+                border-color: var(--primary);
+              }
+              li.active a {
+                background-color: #0366d6;
+                border-color: transparent;
+                color: white;
+                min-width: 32px;
+              }
+              li.disabled a {
+                color: var(--neutral-400);
+                border-color: var(--neutral-400);
+                background: var(--neutral-300);
+              }
+              li.disable,
+              li.disabled a {
+                cursor: not-allowed;
+              }
+            `}
+            breakLabel="..."
+            nextLabel={<Icons.ChevronRightIcon width="12px" strokeWidth={4} />}
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            marginPagesDisplayed={0}
+            pageCount={pageCount}
+            activeClassName="active"
+            previousLabel={
+              <Icons.ChevronLeftIcon width="12px" strokeWidth={4} />
+            }
+            renderOnZeroPageCount={null}
+          />
         </UICore.Box>
       </UICore.Flex>
     </UICore.Box>
