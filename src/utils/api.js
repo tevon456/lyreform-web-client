@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Auth } from ".";
 import config from "./config";
+import { helpers } from "./helpers";
 
 const axios_api = axios.create({
   baseURL: config.API_URL,
@@ -143,10 +144,17 @@ export class Api {
 
   /**
    * Retrieve a form's submissions
+   * @param {string} id form id to retrieve submissions for.
+   * @param {object} options query param options.
+   * @param {number} options.limit how many submissions to return.
+   * @param {number} options.page return a specific page of submission results.
+   * @param {(1|0)} options.sortBy sort the resulting submissions in ascending order 1 ord descending order 0.
    */
-  static async getFormSubmissions(id) {
+  static async getFormSubmissions(id, options) {
     if (id) {
-      const res = await axios_api.get(`/submission/?formId=${id}`);
+      const res = await axios_api.get(
+        `/submission/?formId=${id}&${helpers.objectToQueryString(options)}`
+      );
       return res;
     }
   }
