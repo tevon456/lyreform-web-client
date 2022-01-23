@@ -208,7 +208,7 @@ export class Api {
    * @param {string} id
    */
   static async deleteSubmission(id) {
-    const res = await axios_api.delete(`/submissions/${id}`);
+    const res = await axios_api.delete(`/submission/${id}`);
     return res;
   }
 
