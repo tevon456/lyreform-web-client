@@ -21,7 +21,7 @@ export default function ApplicationRoutes() {
       <ProtectedRoute path="/form/:id" component={Form} />
       <Route exact path="/forgot-password" component={ForgotPassword} />
       <Route path="/new-password/:token" component={NewPassword} />
-      <Route path="/verify-account/:token" component={VerifyAccount} />
+      <Route exact path="/verify-account/:token" component={VerifyAccount} />
       <SessionRoute exact path="/" redirectTo="/dashboard" component={Login} />
       <SessionRoute exact path="/login" redirectTo="/" component={Login} />
       <SessionRoute exact path="/signup" redirectTo="/" component={Signup} />
