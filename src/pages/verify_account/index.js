@@ -33,45 +33,46 @@ export default function VerifyAccount() {
 
 function InnerMessage() {
   const [apply] = useBackground("transparent");
-  const [verify] = useRestResponse("");
+  const { data, setData, loading, setLoading, error, setError } =
+    useRestResponse("");
   const token = useRouteMatch().params.token;
 
   useEffect(() => {
     apply(`var(--secondary)`);
     Api.verifyAccount(token)
       .then((res) => {
-        verify.setLoading(false);
-        verify.setData(res.data.message);
+        setLoading(false);
+        setData(res.data.message);
       })
       .catch((error) => {
         if (error.response.status === 429) {
           Notification.warning("Too many request, please try agin later");
         }
         if (error.response) {
-          verify.setLoading(false);
-          verify.setError(error.response.data.message);
+          setLoading(false);
+          setError(error.response.data.message);
         }
       });
     // eslint-disable-next-line
   }, []);
 
-  if (verify.loading) {
+  if (loading) {
     return (
       <UICore.Text align="center" size="rg" weight="300">
         checking...
       </UICore.Text>
     );
   }
-  if (verify.error) {
+  if (error) {
     return (
       <UICore.Text align="center" size="rg" weight="300">
-        {verify.error}
+        {error}
       </UICore.Text>
     );
   }
   return (
     <UICore.Text align="center" size="rg" weight="300">
-      {verify.data}
+      {data}
     </UICore.Text>
   );
 }
