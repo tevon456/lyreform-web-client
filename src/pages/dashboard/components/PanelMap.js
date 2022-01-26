@@ -3,6 +3,7 @@ import { RenderResponse } from "./index";
 import { Content, Icons, UICore } from "../../../components";
 import "styled-components/macro";
 import { useDialog } from "../../../hooks";
+import { Api, Notification } from "../../../utils";
 
 export default function PanelMap({
   responseKeys = [],
@@ -16,6 +17,14 @@ export default function PanelMap({
     Dialog: DeleteDialog,
   } = useDialog();
 
+  const deleteSubmission = (id) => {
+    Api.deleteSubmission(id)
+      .then((response) => {
+        Notification.success("response deleted");
+      })
+      .catch((err) => {});
+  };
+
   if (!data || !details) {
     return (
       <UICore.Flex
@@ -25,8 +34,13 @@ export default function PanelMap({
           height: 60vh;
         `}
       >
-        <Content.Card height="50px">
-          <UICore.Text weight="300">No response selected</UICore.Text>
+        <Content.Card height="120px" width="220px">
+          <UICore.Flex justify="center">
+            <Icons.LightBulbIcon color="#212529" width="50px" />
+          </UICore.Flex>
+          <UICore.Text weight="300" mb="4px" align="center" color="#495057">
+            View a response by clicking any from the list on the left.
+          </UICore.Text>
         </Content.Card>
       </UICore.Flex>
     );
@@ -73,7 +87,14 @@ export default function PanelMap({
           Are you sure you want to delete this response?{" "}
         </UICore.Text>
         <UICore.Flex justify="flex-end">
-          <UICore.Button kind="danger" onClick={() => refreshResponse()}>
+          <UICore.Button
+            kind="danger"
+            onClick={() => {
+              deleteSubmission(details?.id);
+              refreshResponse();
+              toggleDelete();
+            }}
+          >
             Delete
           </UICore.Button>
           <UICore.Space amount={2} />
