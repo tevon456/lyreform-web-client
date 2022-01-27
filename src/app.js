@@ -13,15 +13,6 @@ export default function App() {
   const links = hasValidSession()
     ? [
         {
-          type: "buttonSecondary",
-          to: "/builder",
-          text: (
-            <>
-              <span>New Form</span>
-            </>
-          ),
-        },
-        {
           type: "any",
           component: <UserAvatarMenu user={user} logout={endSession} />,
         },
