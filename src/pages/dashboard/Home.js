@@ -15,51 +15,30 @@ export default function Home() {
   useEffect(() => {
     Api.getAllForms()
       .then((res) => {
-        setData(res.data);
         setLoading(false);
+        setData(res.data);
       })
       .catch((error) => {
         setLoading(false);
         setError(error);
       });
     // eslint-disable-next-line
-    setLoading(false);
-    console.log(data);
   }, [loading, watch]);
-
-  if (data.length === 0) {
-    return (
-      <UICore.Flex
-        align="center"
-        justify="center"
-        css={`
-          height: 60vh;
-        `}
-      >
-        <Content.Card height="180px" width="270px">
-          <UICore.Flex justify="center">
-            <Icons.LightBulbIcon color="#212529" width="50px" />
-          </UICore.Flex>
-          <UICore.Text weight="300" mb="8px" align="center" color="#495057">
-            You have no forms as yet, you can click the button below to create
-            your first form.
-          </UICore.Text>
-          <UICore.Flex justify="center">
-            <UICore.Button as="a" style={{ color: "#fff" }} href="/builder">
-              Create form
-            </UICore.Button>
-          </UICore.Flex>
-        </Content.Card>
-      </UICore.Flex>
-    );
-  }
 
   return (
     <SubPage>
-      <UICore.Text weight="500" size="lg">
-        Home
-      </UICore.Text>
-      <Content.Card>
+      <UICore.Flex align="center" justify="space-between">
+        <UICore.Text weight="500" size="lg" mt="var(--space-md)">
+          Home
+        </UICore.Text>
+        <div>
+          <UICore.Button as="a" style={{ color: "#fff" }} href="/builder">
+            Create form
+          </UICore.Button>
+        </div>
+      </UICore.Flex>
+
+      <Content.Card heigh="max-content">
         <Table
           loading={loading}
           data={data?.results}
@@ -92,7 +71,31 @@ function Table({ error, loading, data = [], render, watch }) {
         </UICore.Button>
       </UICore.Flex>
     );
-
+  if (data.length === 0) {
+    return (
+      <UICore.Flex align="center" justify="center">
+        <div>
+          <UICore.Flex justify="center">
+            <Icons.LightBulbIcon color="#212529" width="50px" />
+          </UICore.Flex>
+          <UICore.Text weight="300" align="center" color="#495057">
+            You have no forms as yet, you can click the button below to create
+            your first form.
+          </UICore.Text>
+          <UICore.Flex justify="center">
+            <UICore.Button
+              as="a"
+              kind="secondary"
+              style={{ color: "#fff" }}
+              href="/builder"
+            >
+              Create form
+            </UICore.Button>
+          </UICore.Flex>
+        </div>
+      </UICore.Flex>
+    );
+  }
   return (
     <DashboardTable
       columns={["Title", "Status", "Responses", "Actions"]}
