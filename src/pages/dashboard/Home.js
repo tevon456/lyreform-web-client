@@ -1,6 +1,6 @@
 import { Api } from "../../utils";
 import React, { useEffect } from "react";
-import { Content, UICore } from "../../components";
+import { Content, Icons, UICore } from "../../components";
 import { useRender, useRestResponse } from "../../hooks";
 import DashboardTable from "./components/DashboardTable";
 import "styled-components/macro";
@@ -23,7 +23,36 @@ export default function Home() {
         setError(error);
       });
     // eslint-disable-next-line
+    setLoading(false);
+    console.log(data);
   }, [loading, watch]);
+
+  if (data.length === 0) {
+    return (
+      <UICore.Flex
+        align="center"
+        justify="center"
+        css={`
+          height: 60vh;
+        `}
+      >
+        <Content.Card height="180px" width="270px">
+          <UICore.Flex justify="center">
+            <Icons.LightBulbIcon color="#212529" width="50px" />
+          </UICore.Flex>
+          <UICore.Text weight="300" mb="8px" align="center" color="#495057">
+            You have no forms as yet, you can click the button below to create
+            your first form.
+          </UICore.Text>
+          <UICore.Flex justify="center">
+            <UICore.Button as="a" style={{ color: "#fff" }} href="/builder">
+              Create form
+            </UICore.Button>
+          </UICore.Flex>
+        </Content.Card>
+      </UICore.Flex>
+    );
+  }
 
   return (
     <SubPage>
@@ -43,8 +72,7 @@ export default function Home() {
   );
 }
 
-function Table({ error, loading, data, render, watch }) {
-  useEffect(() => {}, [watch]);
+function Table({ error, loading, data = [], render, watch }) {
   if (loading)
     return (
       <UICore.Flex align="center" justify="center">
@@ -64,6 +92,7 @@ function Table({ error, loading, data, render, watch }) {
         </UICore.Button>
       </UICore.Flex>
     );
+
   return (
     <DashboardTable
       columns={["Title", "Status", "Responses", "Actions"]}
