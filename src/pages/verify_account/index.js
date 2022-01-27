@@ -25,6 +25,11 @@ export default function VerifyAccount() {
               Request a verification email
             </Link>
           </UICore.Flex>
+          <UICore.Flex justify="center" className="margin-bottom--xxl">
+            <Link to="/login" style={{ color: "var(--primary)" }}>
+              Login
+            </Link>
+          </UICore.Flex>
         </Content.Card>
       </UICore.Flex>
     </UICore.Page>
