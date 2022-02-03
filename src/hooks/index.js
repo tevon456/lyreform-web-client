@@ -6,8 +6,7 @@ import useKeyPress from "./useKeyPress";
 import useNavbar from "./useNavbar";
 import useDialog from "./useDialog";
 import useRender from "./useRender";
-// import useLockBodyScroll from "./useLockBodyScroll";
-// import useInput from "./useInput";
+import useEventListener from "./useEventListener";
 
 export {
   useNavbar,
@@ -18,6 +17,5 @@ export {
   useKeyPress,
   useDialog,
   useRender,
-  //   useLockBodyScroll,
-  //   useInput,
+  useEventListener,
 };
