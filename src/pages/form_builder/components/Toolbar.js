@@ -18,9 +18,11 @@ export default function Toolbar({
   const { user, endSession } = useContext(SessionContext);
   const origin = "https://live.lyreform.com/preview";
 
-  function Preview() {
+  function preview() {
     let previewWindow = window.open(origin, form.getModel().name);
-    previewWindow.postMessage(JSON.stringify(form.getModel()), origin);
+    setTimeout(() => {
+      previewWindow.postMessage(JSON.stringify(form.getModel()), origin);
+    }, 3000);
   }
 
   useEffect(() => {
@@ -283,7 +285,7 @@ export default function Toolbar({
               hover="#FFFFFF"
               variant="outline"
               color="#FFF"
-              onClick={() => Preview()}
+              onClick={() => preview()}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
