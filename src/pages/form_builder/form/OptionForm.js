@@ -6,6 +6,7 @@ import Checkbox from "../components/Checkbox";
 import { FormSubmit, FormFieldSeparator } from ".";
 import { UICore } from "../../../components";
 import Lyreform from "../../../utils/lyreform";
+import "styled-components/macro";
 
 const schema = yup.object().shape({
   id: yup.string().required(),
@@ -70,20 +71,20 @@ function Options({ options = [], setOptions, id }) {
   let [error, setError] = useState(null);
   let util = new Lyreform().util;
 
-  function change(e) {
+  function onChange(e) {
     let queryResult = util.selectField(options, "value", e.target.value);
     if (queryResult.length === 0) {
       setError(null);
     }
   }
 
-  function handleEnter(e) {
-    if (e.code === "Enter") {
+  function addOption(e) {
+    if (e.key === "Enter") {
       //Ensure that only unique values are passed back
       let newOption = [...options, { value: e.target.value }];
       let queryResult = util.selectField(options, "value", e.target.value);
 
-      if (queryResult.length === 0) {
+      if (queryResult.length === 0 && e.target.value) {
         setOptions(newOption);
       } else {
         setError(`Duplicates not allowed`);
@@ -97,6 +98,19 @@ function Options({ options = [], setOptions, id }) {
     setOptions(newOptions);
   }
 
+  function updateOption(options, e, index) {
+    if (e.key === "Enter") {
+      let value = e.target.value;
+      let query = util.selectField(options, "value", value);
+
+      if (query.length === 0 && value.trim() !== "") {
+        let newOptions = [...options];
+        newOptions.splice(index, 1, { value });
+        setOptions(newOptions);
+      }
+    }
+  }
+
   return (
     <UICore.Box pd="0px" mg="0px" mb="24px" mt="-10px">
       <Input
@@ -107,11 +121,11 @@ function Options({ options = [], setOptions, id }) {
         helperColor="var(--danger)"
         onChange={(e) => {
           e.persist();
-          change(e);
+          onChange(e);
         }}
         onKeyDown={(e) => {
           e.persist();
-          handleEnter(e);
+          addOption(e);
         }}
         mb="16px"
         width="140px"
@@ -122,26 +136,29 @@ function Options({ options = [], setOptions, id }) {
         <UICore.Badge bg="var(--neutral-500)">{options.length}</UICore.Badge>
       </UICore.Text>
       {options.map((option, index) => (
-        <UICore.Box
-          mg="0px"
-          key={option.key}
-          mb="8px"
-          pd="4px"
-          radius="4px"
-          border="1px solid var(--neutral-400)"
+        <UICore.Flex
+          justify="space-between"
+          align="center"
+          css={`
+            margin-bottom: var(--space-sm);
+          `}
         >
-          <UICore.Flex justify="space-between" align="center">
-            <UICore.Text
-              className="truncate"
-              width="240px"
-              mb="2px"
-              weight="300"
-              mt="2px"
-              color="var(--text-dark)"
-            >
-              {option.value}
-            </UICore.Text>
+          <Input
+            defaultValue={option.value}
+            onKeyDown={(e) => {
+              e.persist();
+              updateOption(options, e, index);
+            }}
+            css={`
+              margin-top: 0px;
+            `}
+          />
+
+          <div>
             <UICore.Button
+              css={`
+                margin-top: -6px;
+              `}
               size="sm"
               kind="secondary"
               type="button"
@@ -154,8 +171,8 @@ function Options({ options = [], setOptions, id }) {
                 className="h-5 w-5"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                width="20px"
-                height="20px"
+                width="16px"
+                height="16px"
               >
                 <path
                   fillRule="evenodd"
@@ -164,8 +181,8 @@ function Options({ options = [], setOptions, id }) {
                 />
               </svg>
             </UICore.Button>
-          </UICore.Flex>
-        </UICore.Box>
+          </div>
+        </UICore.Flex>
       ))}
     </UICore.Box>
   );
