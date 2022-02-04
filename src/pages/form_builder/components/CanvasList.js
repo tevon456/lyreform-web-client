@@ -59,6 +59,7 @@ export default function CanvasList({ form, trigger = () => {}, setField }) {
 function FieldList({ list, form, trigger = () => {}, setField }) {
   return list.map((item, index) => (
     <FieldBlock
+      key={item.id}
       item={item}
       form={form}
       trigger={trigger}
