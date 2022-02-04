@@ -4,7 +4,6 @@ import Logo from "../../../resources/icons/logo";
 import { BaseForm, GeneralForm, NumberForm, OptionForm } from "../form";
 import { useHistory } from "react-router-dom";
 import chroma from "chroma-js";
-import { Api, Notification } from "../../../utils";
 
 export default function Panel({
   form,
@@ -19,37 +18,6 @@ export default function Panel({
 
   let general = ["SHORT_ANSWER", "LONG_ANSWER", "DATE", "EMAIL"];
   let multiple = ["DROPDOWN_SELECT", "RADIO_GROUP", "CHECKBOX_GROUP"];
-
-  async function saveForm(data = {}, id = null) {
-    if (id) {
-      let payload = {
-        ...data,
-        uuid: undefined,
-        createdAt: undefined,
-        updatedAt: undefined,
-        user_id: undefined,
-      };
-      Api.updateForm(id, payload)
-        .then((res) => {
-          Notification.success("Save successful.");
-          console.log(res);
-        })
-        .catch((error) => {
-          Notification.danger("An error occurred while updating your form.");
-          console.log(error);
-        });
-    } else {
-      Api.createForm(data)
-        .then((res) => {
-          form.setIdFromBackend(res.data.uuid);
-          Notification.success("Save successful.");
-        })
-        .catch((error) => {
-          Notification.danger("An error occurred while saving your form.");
-          console.log(error);
-        });
-    }
-  }
 
   useEffect(() => {
     setType(form.util.fieldDetails(fieldId)?.field[0]?.field_type || "BASE");
@@ -91,21 +59,6 @@ export default function Panel({
                 },
               },
               { type: "line" },
-              {
-                type: "action",
-                text: "Save",
-                onClick: async () => {
-                  await saveForm(form.getModel(), form.getId());
-                },
-              },
-              {
-                type: "action",
-                text: "Save and Exit",
-                onClick: async () => {
-                  await saveForm(form.getModel(), form.getId());
-                  history.goBack();
-                },
-              },
               {
                 type: "action",
                 text: "Clear fields",
