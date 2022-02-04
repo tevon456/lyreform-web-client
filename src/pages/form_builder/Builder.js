@@ -18,6 +18,10 @@ export function Builder() {
 
   const triggerRender = () => {
     setTrigger(Math.random);
+    let timestamp = Date.now();
+    localStorage.setItem("last_update", timestamp);
+    if (localStorage.getItem("last_save") === undefined)
+      localStorage.setItem("last_save", timestamp);
   };
 
   const setFieldTrigger = (id) => {
@@ -38,6 +42,7 @@ export function Builder() {
         });
     }
     setLoading(false);
+
     // eslint-disable-next-line
   }, [trigger, loading]);
 
