@@ -132,11 +132,11 @@ function Options({ options = [], setOptions, id }) {
       />
       <FormFieldSeparator />
       <UICore.Text mb="8px" mt="2px" weight="300" color="var(--text-dark)">
-        Options{" "}
-        <UICore.Badge bg="var(--neutral-500)">{options.length}</UICore.Badge>
+        Options
       </UICore.Text>
       {options.map((option, index) => (
         <UICore.Flex
+          key={option.value}
           justify="space-between"
           align="center"
           css={`
