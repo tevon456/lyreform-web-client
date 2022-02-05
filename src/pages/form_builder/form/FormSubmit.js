@@ -1,7 +1,7 @@
 import React from "react";
 import { UICore } from "../../../components";
 
-export default function FormSubmit() {
+export default function FormSubmit({ triggerRender = () => {}, ...rest }) {
   return (
     <UICore.Box
       pd="4px"
@@ -20,10 +20,11 @@ export default function FormSubmit() {
         kind="secondary"
         hover="var(--primary-hovered)"
         fullWidth
+        onClick={() => triggerRender()}
         className="margin-top--sm margin-bottom--sm"
       >
-        Apply Changes
-      </UICore.Button>
+        Save changes
+      </UICore.Button>{" "}
     </UICore.Box>
   );
 }

@@ -60,7 +60,7 @@ export default function OptionForm({ form, id, triggerRender }) {
             width="140px"
           />
           <Options options={options} setOptions={setOptions} id={id} />
-          <FormSubmit />
+          <FormSubmit triggerRender={triggerRender} />
         </Form>
       )}
     </Formik>

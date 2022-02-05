@@ -126,7 +126,7 @@ export default function BaseForm({ form, triggerRender }) {
             mb="48px"
             width="100px"
           />
-          <FormSubmit />
+          <FormSubmit triggerRender={triggerRender} />
         </Form>
       )}
     </Formik>

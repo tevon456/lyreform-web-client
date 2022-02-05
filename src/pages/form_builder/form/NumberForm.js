@@ -80,7 +80,7 @@ export default function NumberForm({ form, id, triggerRender }) {
             mb="16px"
             width="140px"
           />
-          <FormSubmit />
+          <FormSubmit triggerRender={triggerRender} />
         </Form>
       )}
     </Formik>
