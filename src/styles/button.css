@@ -19,11 +19,8 @@
   font-weight: 600;
   color: var(--white);
   transition-timing-function: var(--animation);
-  -webkit-transition-timing-function: var(--animation);
   transition-duration: background var(--animation-duration);
-  -webkit-transition-duration: background var(--animation-duration);
   transition: background var(--animation-time);
-  -webkit-transition: background var(--animation-time);
 }
 
 .btn:hover {
