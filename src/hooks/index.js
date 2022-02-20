@@ -7,8 +7,10 @@ import useNavbar from "./useNavbar";
 import useDialog from "./useDialog";
 import useRender from "./useRender";
 import useEventListener from "./useEventListener";
+import useAPI from "./useAPI";
 
 export {
+  useAPI,
   useNavbar,
   useWindowSize,
   useOnClickOutside,
