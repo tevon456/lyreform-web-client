@@ -5,7 +5,7 @@
 
 body {
   margin: 0;
-  background-color: rgba(246, 246, 247, 1);
+  background-color: #fafafa;
   color: var(--text-dark);
   overflow-x: hidden;
 }
@@ -65,4 +65,9 @@ a:visited {
 .sideBarActive > div {
   background: #eaeffb;
   color: var(--primary) !important;
+}
+
+.nav-active {
+  background: var(--primary);
+  color: #fff;
 }
