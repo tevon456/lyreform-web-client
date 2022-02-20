@@ -35,9 +35,6 @@ export default function PanelMap({
         `}
       >
         <Content.Card height="120px" width="220px">
-          <UICore.Flex justify="center">
-            <Icons.LightBulbIcon color="#212529" width="50px" />
-          </UICore.Flex>
           <UICore.Text weight="300" mb="4px" align="center" color="#495057">
             View a response by clicking any from the list on the left.
           </UICore.Text>
@@ -51,7 +48,7 @@ export default function PanelMap({
         <div>
           <UICore.Flex align="center">
             <UICore.Box ml="0px" pl="0px">
-              <Icons.CalendarIcon width="20px" height="20px" />
+              <Icons.Calendar width="20px" height="20px" />
             </UICore.Box>
 
             <UICore.Text align="left" variantNumeric="tabular-nums">
@@ -61,7 +58,7 @@ export default function PanelMap({
           </UICore.Flex>
         </div>
         <UICore.Button kind="danger" onClick={() => toggleDelete()}>
-          <Icons.TrashIcon width="20px" />
+          <Icons.Trash width="20px" />
         </UICore.Button>
       </UICore.Flex>
 

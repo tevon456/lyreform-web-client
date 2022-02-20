@@ -26,19 +26,17 @@ export default function Home() {
   }, [loading, watch]);
 
   return (
-    <SubPage>
-      <UICore.Flex align="center" justify="space-between">
-        <UICore.Text weight="500" size="lg" mt="var(--space-md)">
-          Home
-        </UICore.Text>
+    <SubPage
+      title="Home"
+      actions={
         <div>
           <UICore.Button as="a" style={{ color: "#fff" }} href="/builder">
             Create form
           </UICore.Button>
         </div>
-      </UICore.Flex>
-
-      <Content.Card heigh="max-content">
+      }
+    >
+      <Content.Card>
         <Table
           loading={loading}
           data={data?.results}
@@ -75,9 +73,6 @@ function Table({ error, loading, data = [], render, watch }) {
     return (
       <UICore.Flex align="center" justify="center">
         <div>
-          <UICore.Flex justify="center">
-            <Icons.LightBulbIcon color="#212529" width="50px" />
-          </UICore.Flex>
           <UICore.Text weight="300" align="center" color="#495057">
             You have no forms as yet, you can click the button below to create
             your first form.
