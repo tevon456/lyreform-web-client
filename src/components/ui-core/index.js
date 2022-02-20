@@ -7,5 +7,6 @@ import Line from "./Line";
 import Badge from "./Badge";
 import Space from "./Space";
 import Loader from "./Loader";
+import DataTable from "./DataTable";
 
-export { Badge, Box, Flex, Text, Space, Page, Button, Line, Loader };
+export { DataTable, Badge, Box, Flex, Text, Space, Page, Button, Line, Loader };
