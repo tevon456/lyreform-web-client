@@ -55,7 +55,7 @@ export default function Inbox() {
   }
 
   return (
-    <UICore.Box pd="0px" mt="52px" width="calc(100vw - 220px)">
+    <UICore.Box pd="0px" mg="0px" width="auto">
       <UICore.Flex>
         <SidePanel
           setResponses={setResponses}
@@ -118,10 +118,10 @@ function SidePanel({
     <UICore.Box
       pd="0px"
       mg="0px"
-      ml="16px"
+      ml="0px"
       bg="var(--neutral-100)"
       br="1px solid var(--neutral-400)"
-      height="calc(100vh - 52px)"
+      height="100vh"
     >
       <UICore.Flex direction="column">
         <UICore.Box
@@ -148,7 +148,7 @@ function SidePanel({
               y="12px"
             >
               <UICore.Button fullWidth title="switch form">
-                <Icons.SwitchVerticalIcon width="19px" height="19px" />
+                <Icons.ChevronDown width="19px" height="19px" />
               </UICore.Button>
             </Content.DropDown>
             <UICore.Space amount={2} />
@@ -252,14 +252,14 @@ function SidePanel({
               }
             `}
             breakLabel="..."
-            nextLabel={<Icons.ChevronRightIcon width="12px" strokeWidth={4} />}
+            nextLabel={<Icons.ArrowRightCircle width="12px" strokeWidth={4} />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={1}
             marginPagesDisplayed={0}
             pageCount={pageCount}
             activeClassName="active"
             previousLabel={
-              <Icons.ChevronLeftIcon width="12px" strokeWidth={4} />
+              <Icons.ArrowLeftCircle width="12px" strokeWidth={4} />
             }
             renderOnZeroPageCount={null}
           />
@@ -303,7 +303,7 @@ function MainPanel({ activeId, responses, refreshResponse }) {
           minHeight="33px"
         >
           <UICore.Flex align="center" justify="flex-end">
-            {/* <UICore.Button>New Form</UICore.Button> */}
+            <UICore.Button>New Form</UICore.Button>
           </UICore.Flex>
         </UICore.Box>
         <UICore.Box
