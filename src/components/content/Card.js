@@ -4,15 +4,15 @@ import { UICore } from "..";
 export default function Card({ width, height, children, ...rest }) {
   return (
     <UICore.Box
-      border="1px solid var(--neutral-350)"
+      border="1px solid #dee2e6"
       mg="0px"
       pd="var(--space-xs)"
       radius="4px"
-      bg="var(--neutral-100)"
+      bg="#fff"
       color="var(--text-dark)"
       height={height || "auto"}
       width={width || "auto"}
-      shadow="0px 0px 5px rgba(23, 24, 24, 0.05), 0px 1px 2px rgba(0, 0, 0, 0.15)"
+      shadow=" 0 1px 1px rgba(0, 0, 0, 0.12);"
       textAlign="left"
       {...rest}
     >
