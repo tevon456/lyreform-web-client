@@ -5,67 +5,24 @@ import Home from "./Home";
 import Templates from "./Templates";
 import DashboardNotFound from "./NotFound";
 import Inbox from "./Inbox";
+import { AppShell } from "./components";
+import { paths } from "../../utils";
 
 export default function Dashboard() {
   return (
-    <UICore.Flex>
-      <UICore.Box
-        mg="0px"
-        bg="var(--neutral-100)"
-        br="1px solid var(--neutral-400)"
-        height="calc(100vh - calc(8px * 2))"
-        width="220px"
-        css={`
-          position: fixed;
-        `}
-      >
-        <UICore.Box mg="0px" mt="60px">
-          <SideBarLink
-            exact={true}
-            icon={Icons.HomeIcon({ width: "20px", height: "20px" })}
-            to="/dashboard"
-            text="Home"
-          />
-          <SideBarLink
-            icon={Icons.InboxIcon({ width: "20px", height: "20px" })}
-            to="/dashboard/inbox"
-            text="Response Inbox"
-          />
-          <SideBarLink
-            icon={Icons.FolderIcon({ width: "20px", height: "20px" })}
-            to="/dashboard/templates"
-            text="Templates"
-          />
-          <SideBarLink
-            icon={Icons.QuestionMarkCircleIcon({
-              width: "20px",
-              height: "20px",
-            })}
-            to="/dashboard/help"
-            text="Help"
-          />
-        </UICore.Box>
-      </UICore.Box>
-
-      <div
-        css={`
-          margin-left: 220px;
-          flex-grow: 12;
-        `}
-      >
-        <Routes />
-      </div>
-    </UICore.Flex>
+    <AppShell>
+      <Routes />
+    </AppShell>
   );
 }
 
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/dashboard" component={Home} />
-      <Route exact path="/dashboard/inbox" component={Inbox} />
-      <Route exact path="/dashboard/inbox/:form_id/" component={Inbox} />
-      <Route exact path="/dashboard/templates" component={Templates} />
+      <Route exact path={paths.DASHBOARD} component={Home} />
+      <Route exact path={paths.INBOX} component={Inbox} />
+      <Route exact path={`${paths.INBOX}/:form_id/`} component={Inbox} />
+      <Route exact path={paths.TEMPLATES} component={Templates} />
       <Route component={DashboardNotFound} />
     </Switch>
   );
