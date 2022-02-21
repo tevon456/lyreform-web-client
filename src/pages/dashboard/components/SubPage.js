@@ -9,14 +9,14 @@ export default function SubPage({ title, actions, children }) {
   return (
     <main
       css={`
-        padding: 2rem 12rem;
+        padding: 4rem 12rem;
         margin-bottom: 6rem;
 
         @media screen and (max-width: 1260px) {
-          padding: 2rem 8rem;
+          padding: 4rem 8rem;
         }
         @media screen and (max-width: 1060px) {
-          padding: 2rem 6rem;
+          padding: 4rem 6rem;
         }
         @media screen and (max-width: 970px) {
           padding: 2rem 4rem;
