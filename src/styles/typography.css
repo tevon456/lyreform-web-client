@@ -13,7 +13,7 @@ Typography
 
   --font-3: "Kanit", sans-serif;
 
-  --font-primary: var(--font-1);
+  --font-primary: var(--font-2);
   --font-secondary: var(--font-1);
   --font-fallback: var(--font-primary);
 
