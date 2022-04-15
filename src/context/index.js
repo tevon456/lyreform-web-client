@@ -1,13 +1,11 @@
 import { SessionProvider, SessionContext } from "./session.context";
 import { UserProvider, UserContext } from "./user.context";
 
-const AppProvider = (children) => {
+const AppProvider = ({ children }) => {
   return (
-    <>
-      <SessionProvider>
-        <UserProvider>{children}</UserProvider>
-      </SessionProvider>
-    </>
+    <SessionProvider>
+      <UserProvider>{children}</UserProvider>
+    </SessionProvider>
   );
 };
 
