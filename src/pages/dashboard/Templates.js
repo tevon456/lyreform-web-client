@@ -5,13 +5,7 @@ import { SubPage } from "./components";
 
 export default function Templates() {
   return (
-    <SubPage>
-      <UICore.Flex>
-        <UICore.Text weight="500" size="lg">
-          Templates
-        </UICore.Text>
-      </UICore.Flex>
-
+    <SubPage title="Templates">
       <Content.Card>
         <UICore.Text>Templates are coming soon</UICore.Text>
       </Content.Card>
