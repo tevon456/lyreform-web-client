@@ -1,29 +1,127 @@
 import { Api } from "../../utils";
-import React, { useEffect } from "react";
-import { Content, Icons, UICore } from "../../components";
-import { useRender, useRestResponse } from "../../hooks";
+import React, { useState } from "react";
+import { Content, UICore } from "../../components";
+import { useAPI, useDialog } from "../../hooks";
 import DashboardTable from "./components/DashboardTable";
 import "styled-components/macro";
 import { SubPage } from "./components";
+import { DataTable } from "../../components/ui-core";
+import { useHistory } from "react-router-dom";
 
 export default function Home() {
-  let { loading, setLoading, data, setData, error, setError } = useRestResponse(
-    []
-  );
-  let [watch, render] = useRender();
+  const history = useHistory();
+  const [formUUID, setFormUUID] = useState(null);
+  const {
+    open: deleteOpen,
+    toggle: toggleDelete,
+    Dialog: Delete,
+  } = useDialog();
+  let { loading, data } = useAPI(() => Api.getAllForms(), {
+    data: { results: [], current_page: 0, limit: 10, total_pages: 1 },
+  });
 
-  useEffect(() => {
-    Api.getAllForms()
-      .then((res) => {
-        setLoading(false);
-        setData(res.data);
+  function deleteForm(id) {
+    Api.deleteForm(id)
+      .then(() => {
+        Notification.success("Form deleted successfully");
+        window.location.reload();
       })
-      .catch((error) => {
-        setLoading(false);
-        setError(error);
+      .catch(() => {
+        Notification.danger("There was an error deleting this form");
       });
-    // eslint-disable-next-line
-  }, [loading, watch]);
+  }
+
+  const columns = [
+    {
+      name: "Title",
+      selector: "name",
+      component: (row) => (
+        <UICore.Text
+          mt="2px"
+          mb="2px"
+          className="truncate"
+          style={{ maxWidth: "160px" }}
+        >
+          {row.name}
+        </UICore.Text>
+      ),
+    },
+    {
+      name: "Status",
+      selector: "status",
+      componentWrapped: true,
+      breakpoint: 920,
+      component: (row) =>
+        row.published ? (
+          <UICore.Badge color="#10451d" bg="#b7efc5">
+            published
+          </UICore.Badge>
+        ) : (
+          <UICore.Badge color="#10451d" bg="#b7efc5">
+            draft
+          </UICore.Badge>
+        ),
+    },
+    {
+      name: "Responses",
+      selector: "Submissions",
+      breakpoint: 780,
+      component: (row) => <div>{row.Submissions.length}</div>,
+    },
+    {
+      name: "Actions",
+      selector: "destination",
+      component: (row) => (
+        <UICore.Flex>
+          <div>
+            <UICore.Button
+              kind="secondary"
+              onClick={() => {
+                window.open(
+                  `https://live.lyreform.com/${row["uuid"]}`,
+                  "_blank"
+                );
+              }}
+            >
+              view
+            </UICore.Button>
+          </div>
+          <UICore.Space amount={2} />
+          <div>
+            <Content.DropDown
+              width="100px"
+              items={[
+                {
+                  type: "action",
+                  text: "Edit",
+                  onClick: () => {
+                    history.push("/builder", { formId: row["uuid"] });
+                  },
+                },
+                {
+                  type: "action",
+                  text: "Delete",
+                  color: "red",
+                  onClick: () => {
+                    setFormUUID(row["uuid"]);
+                    toggleDelete();
+                  },
+                },
+              ]}
+              x="-46px"
+              y="0px"
+            >
+              <UICore.Box mg="0px" pd="0px">
+                <UICore.Button size="sm" variant="outline" kind="secondary">
+                  More
+                </UICore.Button>
+              </UICore.Box>
+            </Content.DropDown>
+          </div>
+        </UICore.Flex>
+      ),
+    },
+  ];
 
   return (
     <SubPage
@@ -37,13 +135,11 @@ export default function Home() {
       }
     >
       <Content.Card>
-        <Table
-          loading={loading}
-          data={data?.results}
-          error={error}
-          render={render}
-          watch={watch}
-        />
+        {loading ? (
+          <UICore.Loader />
+        ) : (
+          <DataTable columns={columns} data={data.data.results} />
+        )}
       </Content.Card>
     </SubPage>
   );
