@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import jwt_decode from "jwt-decode";
-import { Auth, Api, Notification } from "../utils/";
+import { Auth, Api, Notification } from "../utils";
 
 const SessionContext = React.createContext();
 function SessionProvider({ children }) {
@@ -8,11 +8,12 @@ function SessionProvider({ children }) {
 
   if (Auth.isUserAuthenticated()) {
     access = jwt_decode(Auth.getToken().access);
-    user = { name: access.name, email: access.email };
+    user = { name: access?.name, email: access?.email, uid: access.data };
   } else {
     user = {
       name: "",
       email: "",
+      uid: "",
     };
   }
   const createSession = (tokens) => {
