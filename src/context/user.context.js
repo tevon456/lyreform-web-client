@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Api } from "../utils";
 import { useAPI } from "../hooks";
 import { SessionContext } from "./session.context";
