@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
-import { SessionProvider } from "./context/Session";
+import { AppProvider } from "./context";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 
@@ -15,10 +15,14 @@ Sentry.init({
 });
 
 ReactDOM.render(
-  <Sentry.ErrorBoundary fallback={"An error has occurred"}>
-    <SessionProvider>
+  <Sentry.ErrorBoundary
+    fallback={() => {
+      return <>"An error has occurred"</>;
+    }}
+  >
+    <AppProvider>
       <App />
-    </SessionProvider>
+    </AppProvider>
   </Sentry.ErrorBoundary>,
   document.getElementById("root")
 );
