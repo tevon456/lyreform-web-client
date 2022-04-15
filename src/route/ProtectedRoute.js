@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom";
 import React, { useContext } from "react";
-import { SessionContext } from "../context/Session";
+import { SessionContext } from "../context";
 import Navigate from "./Navigate";
 
 /**

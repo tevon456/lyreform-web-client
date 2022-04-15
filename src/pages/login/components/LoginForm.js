@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FormField, UICore } from "../../../components";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { SessionContext } from "../../../context/Session";
+import { SessionContext } from "../../../context";
 import { Notification } from "../../../utils";
 import { Api } from "../../../utils/";
 
@@ -26,13 +26,17 @@ export default function LoginForm() {
     resolver: yupResolver(schema),
   });
   const { createSession } = useContext(SessionContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = (data) => {
+    setIsSubmitting(true);
     Api.login(data)
       .then((res) => {
+        setIsSubmitting(false);
         createSession(res.data.tokens);
       })
       .catch((error) => {
+        setIsSubmitting(false);
         if (error.response?.status === 429) {
           Notification.warning("Too many request, please try agin later");
         }
@@ -70,12 +74,13 @@ export default function LoginForm() {
         Forgot password?
       </Link>
       <UICore.Button
+        disabled={isSubmitting}
         size="lg"
         fullWidth
         type="submit"
         className="margin-top--lg margin-bottom--sm"
       >
-        Submit
+        {isSubmitting ? "Please wait..." : "Submit"}
       </UICore.Button>
       <UICore.Text>
         Don't have an account?{" "}
