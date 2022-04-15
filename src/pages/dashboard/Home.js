@@ -57,7 +57,7 @@ export default function Home() {
             published
           </UICore.Badge>
         ) : (
-          <UICore.Badge color="#10451d" bg="#b7efc5">
+          <UICore.Badge color="var(--500)" bg="var(--neutral-300)">
             draft
           </UICore.Badge>
         ),
