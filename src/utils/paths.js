@@ -5,6 +5,7 @@ const paths = {
   FORGOT_PASSWORD: "/forgot-password",
   DASHBOARD: "/dashboard",
   INBOX: "/dashboard/inbox",
+  TEMPLATES: "/dashboard/templates",
   ACCOUNT: "/dashboard/account",
 };
 
