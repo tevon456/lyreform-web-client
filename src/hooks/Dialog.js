@@ -4,7 +4,7 @@ import styled from "styled-components";
 import useOnClickOutside from "./useOnClickOutside";
 import { UICore } from "../components";
 
-function Dialog({ open, close, name, width, height, children, blur, rest }) {
+function Dialog({ open, close, name, width, height, children, blur, ...rest }) {
   const ref = useRef();
   useOnClickOutside(ref, () => close() || null);
 
@@ -30,11 +30,16 @@ function Dialog({ open, close, name, width, height, children, blur, rest }) {
 }
 
 function DialogInner({ name, close, width, height, children }) {
+  const passFocusToClose = () => {
+    document.getElementById("dialog-close").focus();
+  };
+
   return (
     <UICore.Box bg="#fff" radius="4px" pd="0px" pb="6px">
       <UICore.Box
-        bg="var(--neutral-200)"
+        bg="var(--neutral-100)"
         mg="0px"
+        bb="1px solid var(--neutral-300)"
         radius="4px 4px 0px 0px"
         pd="12px"
       >
@@ -42,41 +47,44 @@ function DialogInner({ name, close, width, height, children }) {
           <UICore.Text
             mt="0px"
             color="var(--text-dark)"
-            weight="500"
+            weight="bold"
             size="md"
             className="margin-top--none margin-bottom--none"
           >
             {name}
           </UICore.Text>
-          <UICore.Button
-            width="40px"
-            height="30px"
-            kind="secondary"
-            autoFocus
-            mg="0px"
-            pd="0px"
-            data-cy="close-dialog"
-            onClick={() => close()}
-          >
-            <UICore.Flex align="center" justify="center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="var(--text-light)"
-                width="24px"
-                height="24px"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </UICore.Flex>
-          </UICore.Button>
+          <div>
+            <UICore.Button
+              id="dialog-close"
+              width="40px"
+              height="30px"
+              kind="secondary"
+              autoFocus
+              mg="0px"
+              pd="0px"
+              size="sm"
+              data-cy="close-dialog"
+              onClick={() => close()}
+            >
+              <UICore.Flex align="center" justify="center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="var(--text-light)"
+                  width="20px"
+                  height="20px"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </UICore.Flex>
+            </UICore.Button>
+          </div>
         </UICore.Flex>
       </UICore.Box>
       <UICore.Box
@@ -105,6 +113,10 @@ function DialogInner({ name, close, width, height, children }) {
         style={{ overflowY: "auto", overflowX: "hidden" }}
       >
         {children}
+        <button
+          style={{ border: "none", background: "transparent" }}
+          onFocusCapture={() => passFocusToClose()}
+        />
       </UICore.Box>
     </UICore.Box>
   );
