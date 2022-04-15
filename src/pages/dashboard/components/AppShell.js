@@ -4,7 +4,7 @@ import { breakpoints, paths } from "../../../utils";
 import "styled-components/macro";
 import { useContext } from "react";
 import { SessionContext } from "../../../context";
-import { UICore, Icons } from "../../../components";
+import { UICore, Icons, Content } from "../../../components";
 import { useNavbar } from "../../../hooks";
 import Logo from "../../../resources/icons/logo";
 
@@ -46,7 +46,7 @@ function NavigationPanel() {
         flex-direction: column;
         width: 240px;
         color: var(--neutral-100);
-        background: var(--neutral-500);
+        background: #212121;
 
         @media screen and (max-width: ${breakpoints.phablet}) {
           width: 100px;
@@ -76,18 +76,24 @@ function NavigationPanel() {
       <div
         css={`
           height: 40px;
-          padding: 8px;
+          padding: 20px 8px;
         `}
       >
         <UICore.Button
           fullWidth
+          color="var(text-dark)"
           bg="var(--neutral-100)"
-          color="var(--neutral-500)"
           onClick={() => history.push(paths.ACCOUNT)}
         >
-          <UICore.Space amount={1} />
+          <Content.Avatar
+            name={user.name}
+            size="small"
+            className="margin-top--none margin-bottom--none"
+          />
+          <UICore.Space amount={2} />
           <span
             css={`
+              text-align: left;
               width: 150px;
               white-space: nowrap;
               overflow: hidden;
@@ -142,6 +148,7 @@ function NavigationItem({ href, name, icon, ...rest }) {
       <div
         css={`
           display: flex;
+          align-items: center;
           @media screen and (max-width: ${breakpoints.phablet}) {
             justify-content: center;
           }
@@ -157,7 +164,9 @@ function NavigationItem({ href, name, icon, ...rest }) {
         >
           {icon}
         </div>
-        <div className="nav-list-text">{name}</div>
+        <div className="nav-list-text margin-top--none margin-bottom--none">
+          {name}
+        </div>
       </div>
     </NavLink>
   );
