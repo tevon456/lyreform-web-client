@@ -2,7 +2,6 @@ import { Api } from "../../utils";
 import React, { useState } from "react";
 import { Content, UICore } from "../../components";
 import { useAPI, useDialog } from "../../hooks";
-import DashboardTable from "./components/DashboardTable";
 import "styled-components/macro";
 import { SubPage } from "./components";
 import { DataTable } from "../../components/ui-core";
@@ -89,7 +88,7 @@ export default function Home() {
           <UICore.Space amount={2} />
           <div>
             <Content.DropDown
-              width="100px"
+              width="150px"
               items={[
                 {
                   type: "action",
@@ -140,57 +139,29 @@ export default function Home() {
         ) : (
           <DataTable columns={columns} data={data.data.results} />
         )}
-      </Content.Card>
-    </SubPage>
-  );
-}
-
-function Table({ error, loading, data = [], render, watch }) {
-  if (loading)
-    return (
-      <UICore.Flex align="center" justify="center">
-        <UICore.Loader />
-      </UICore.Flex>
-    );
-  if (error)
-    return (
-      <UICore.Flex align="center" direction="column" justify="center">
-        <UICore.Text>An error occurred</UICore.Text>
-        <UICore.Button
-          onClick={() => {
-            render();
-          }}
-        >
-          Retry
-        </UICore.Button>
-      </UICore.Flex>
-    );
-  if (data.length === 0) {
-    return (
-      <UICore.Flex align="center" justify="center">
-        <div>
-          <UICore.Text weight="300" align="center" color="#495057">
-            You have no forms as yet, you can click the button below to create
-            your first form.
+        <Delete name="Delete Form" open={deleteOpen} close={toggleDelete}>
+          <UICore.Text mb="12px">
+            Are you sure you want to delete this form?
           </UICore.Text>
-          <UICore.Flex justify="center">
+          <UICore.Flex justify="flex-end" align="center">
             <UICore.Button
-              as="a"
               kind="secondary"
-              style={{ color: "#fff" }}
-              href="/builder"
+              style={{ display: "block" }}
+              onClick={() => toggleDelete()}
             >
-              Create form
+              Cancel
+            </UICore.Button>
+            <UICore.Space amount={2} />
+            <UICore.Button
+              kind="danger"
+              style={{ display: "block" }}
+              onClick={() => deleteForm(formUUID)}
+            >
+              Delete
             </UICore.Button>
           </UICore.Flex>
-        </div>
-      </UICore.Flex>
-    );
-  }
-  return (
-    <DashboardTable
-      columns={["Title", "Status", "Responses", "Actions"]}
-      data={data}
-    />
+        </Delete>
+      </Content.Card>
+    </SubPage>
   );
 }
