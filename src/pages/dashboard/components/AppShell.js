@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { breakpoints, paths } from "../../../utils";
 import "styled-components/macro";
 import { useContext } from "react";
-import { SessionContext } from "../../../context";
+import { UserContext } from "../../../context";
 import { UICore, Icons, Content } from "../../../components";
 import { useNavbar } from "../../../hooks";
 import Logo from "../../../resources/icons/logo";
@@ -37,7 +37,7 @@ export default function AppShell({ children }) {
 
 function NavigationPanel() {
   const history = useHistory();
-  const { user } = useContext(SessionContext);
+  const { user } = useContext(UserContext);
   return (
     <nav
       css={`
@@ -86,7 +86,7 @@ function NavigationPanel() {
           onClick={() => history.push(paths.ACCOUNT)}
         >
           <Content.Avatar
-            name={user.name}
+            name={user?.name}
             size="small"
             className="margin-top--none margin-bottom--none"
           />
@@ -100,7 +100,7 @@ function NavigationPanel() {
               text-overflow: ellipsis;
             `}
           >
-            {user.name}
+            {user?.name}
           </span>
         </UICore.Button>
       </div>
