@@ -15,14 +15,15 @@ Sentry.init({
 });
 
 ReactDOM.render(
-  <Sentry.ErrorBoundary
-    fallback={() => {
-      return <>"An error has occurred"</>;
-    }}
-  >
+  <Sentry.ErrorBoundary fallback={Fallback}>
     <AppProvider>
       <App />
     </AppProvider>
   </Sentry.ErrorBoundary>,
   document.getElementById("root")
 );
+
+// TODO better fallback
+function Fallback() {
+  return <>An error has occurred</>;
+}
