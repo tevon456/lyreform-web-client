@@ -57,7 +57,7 @@ export function Builder() {
       pd="0px"
       height="100vh"
       style={{ overflow: "hidden" }}
-      bg="url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAG0lEQVQYlWN49uzZf2IwwyBS2NXVNejdSLFCAKgycCDuKdMrAAAAAElFTkSuQmCC) repeat;"
+      bg="url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQYV2P89evXfwYiAOOoQnyhRN3g0dLSagQAQJUoTMmBR10AAAAASUVORK5CYII=) repeat;"
     >
       <UICore.Box height="100vh" pd="0px">
         <UICore.Flex align="center" highlight>
