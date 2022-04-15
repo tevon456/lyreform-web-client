@@ -8,12 +8,16 @@ function SessionProvider({ children }) {
 
   if (Auth.isUserAuthenticated()) {
     access = jwt_decode(Auth.getToken().access);
-    user = { name: access?.name, email: access?.email, uid: access.data };
+    user = {
+      name: access?.name,
+      email: access?.email,
+      uuid: access.data?.uuid,
+    };
   } else {
     user = {
       name: "",
       email: "",
-      uid: "",
+      uuid: "",
     };
   }
   const createSession = (tokens) => {
@@ -85,6 +89,7 @@ function SessionProvider({ children }) {
     endSession,
     hasValidSession,
     user,
+    access,
   };
   return (
     <SessionContext.Provider value={state}>{children}</SessionContext.Provider>
