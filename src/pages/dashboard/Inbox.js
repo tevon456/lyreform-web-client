@@ -119,15 +119,17 @@ function SidePanel({
       pd="0px"
       mg="0px"
       ml="0px"
-      bg="var(--neutral-100)"
+      bg="#f3f3f3"
       br="1px solid var(--neutral-400)"
       height="100vh"
     >
       <UICore.Flex direction="column">
         <UICore.Box
           width="220px"
+          height="33px"
           border="1px solid var(--neutral-400)"
           br="none"
+          bg="var(--neutral-100)"
           mg="0px"
         >
           <UICore.Flex align="center">
