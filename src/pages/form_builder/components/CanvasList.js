@@ -1,6 +1,7 @@
 import React from "react";
 import { UICore } from "../../../components";
 import Toolbar from "./Toolbar";
+import "styled-components/macro";
 import { fieldDescription } from "../helpers/";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -86,13 +87,19 @@ function FieldBlock({ item, form, index, trigger = () => {}, setField }) {
             height="max-content"
             minHeight="140px"
             position="relative"
-            cursor="grab"
-            bg="var(--neutral-200)"
+            border="1px solid var(--neutral-300)"
+            bg="var(--neutral-100)"
             mb="42px"
             pd="0px"
           >
             <UICore.Box
-              bb="2px solid var(--neutral-300)"
+              bb="1px solid var(--neutral-300)"
+              cursor="grab"
+              css={`
+                &:active {
+                  cursor: grab;
+                }
+              `}
               bg={snapshot.isDragging ? "var(--primary)" : "#2A2A2A"}
             >
               <UICore.Flex align="center" justify="space-between">
