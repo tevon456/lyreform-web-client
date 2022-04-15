@@ -221,9 +221,20 @@ export class Api {
 
   /**
    * Retrieve logged in User
+   * @param {string} userId
    */
-  static async getUser() {
-    const res = await axios_api.get("/user");
+  static async getUser(userId) {
+    const res = await axios_api.get(`/user/${userId}`);
+    return res;
+  }
+
+  /**
+   * update logged in user
+   * @param {string} userId
+   * @param {object} data
+   */
+  static async updateUser(userId, data) {
+    const res = await axios_api.patch(`/user/${userId}`, data);
     return res;
   }
 }
