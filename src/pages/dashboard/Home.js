@@ -77,7 +77,9 @@ export default function Home() {
               kind="secondary"
               onClick={() => {
                 window.open(
-                  `https://live.lyreform.com/${row["uuid"]}`,
+                  process.env.NODE_ENV === "production"
+                    ? `${process.env.REACT_APP_PROD_FORM_URL}/${row["uuid"]}`
+                    : `${process.env.REACT_APP_DEV_FORM_URL}/${row["uuid"]}`,
                   "_blank"
                 );
               }}
