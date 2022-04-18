@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import { Content, FormField, UICore } from "../../components";
 import "styled-components/macro";
 import { SubPage } from "./components";
-import { UserContext } from "../../context";
+import { UserContext, SessionContext } from "../../context";
 import { Api, Notification } from "../../utils";
 
 export default function Account() {
   const { user, refetch } = useContext(UserContext);
+  const { endSession } = useContext(SessionContext);
 
   const updateName = async (e) => {
     try {
@@ -26,7 +27,14 @@ export default function Account() {
   };
 
   return (
-    <SubPage title="Account">
+    <SubPage
+      title="Account"
+      actions={
+        <UICore.Button kind="secondary" onClick={() => endSession()}>
+          Logout
+        </UICore.Button>
+      }
+    >
       <Content.Card>
         <UICore.Text size="md" weight="bold">
           Personal
