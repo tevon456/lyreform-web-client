@@ -17,7 +17,10 @@ export default function Toolbar({
   const size = useWindowSize();
   const [toolWidth, setToolWidth] = useState("100%");
   const [unsavedChanges, setUnsavedChanges] = useState(false);
-  const origin = "https://live.lyreform.com/preview";
+  const origin =
+    process.env.NODE_ENV === "production"
+      ? `${process.env.REACT_APP_PROD_FORM_URL}/preview`
+      : `${process.env.REACT_APP_DEV_FORM_URL}/preview`;
 
   async function saveForm(data = {}, id = null) {
     if (id) {
