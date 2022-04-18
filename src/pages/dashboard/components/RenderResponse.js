@@ -37,8 +37,8 @@ export default function RenderResponse({ type, responseKey, data }) {
               background="#bcdfff"
               color="var(--accent-color)"
               align="left"
-              data-balloon-length="large"
-              aria-label="As you update your form with new fields old responses are filled in to reflect the changes."
+              data-balloon-length="medium"
+              aria-label="When you update your form with new fields, existing replies that do not have the new fields are filled in with empty placeholders."
               data-balloon-pos="right"
             >
               {data[responseKey].label}
