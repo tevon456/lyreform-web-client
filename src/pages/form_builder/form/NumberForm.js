@@ -77,7 +77,7 @@ export default function NumberForm({ form, id, triggerRender }) {
             label="Required"
             onChange={handleChange}
             defaultChecked={field.required}
-            mb="16px"
+            mb="var(--space-xxl)"
             width="140px"
           />
           <FormSubmit triggerRender={triggerRender} />

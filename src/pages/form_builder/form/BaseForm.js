@@ -123,7 +123,7 @@ export default function BaseForm({ form, triggerRender }) {
             label="Page Base"
             onChange={handleChange}
             value={values?.page_background}
-            mb="48px"
+            mb="var(--space-xxl)"
             width="100px"
           />
           <FormSubmit triggerRender={triggerRender} />

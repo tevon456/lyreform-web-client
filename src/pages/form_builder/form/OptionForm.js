@@ -60,6 +60,7 @@ export default function OptionForm({ form, id, triggerRender }) {
             width="140px"
           />
           <Options options={options} setOptions={setOptions} id={id} />
+          <div className="margin-bottom--xxl" />
           <FormSubmit triggerRender={triggerRender} />
         </Form>
       )}
