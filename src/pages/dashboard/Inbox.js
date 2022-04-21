@@ -119,11 +119,11 @@ function SidePanel({
       pd="0px"
       mg="0px"
       ml="0px"
-      bg="#f3f3f3"
+      bg="#fff"
       br="1px solid var(--neutral-400)"
       height="100vh"
     >
-      <UICore.Flex direction="column">
+      <UICore.Flex direction="column" css={"height:100vh;"}>
         <UICore.Box
           width="220px"
           height="33px"
@@ -177,7 +177,7 @@ function SidePanel({
               key={response.id}
               css={`
                 margin-bottom: 4px;
-                border-radius: 4px;
+                border-radius: 2px;
               `}
             >
               <UICore.Box
@@ -188,15 +188,20 @@ function SidePanel({
                 }
                 color={activeId === response.id ? "#fff" : "var(--text-dark)"}
                 onClick={() => setActiveId(response?.id)}
-                radius="4px"
-                pd="4px"
+                radius="2px"
+                pd="4px 8px"
                 mb="2px"
                 css={`
+                  min-height: 60px;
                   cursor: pointer;
                   font-family: var(--font-secondary), var(--font-fallback);
                   &:hover {
-                    box-shadow: 0 0 0px 2px var(--primary);
-                  }
+                    background: ${
+                      activeId === response.id ? "var(--primary)" : "#e8e8e8"
+                    };
+                    color: ${
+                      activeId === response.id ? "#fff" : "var(--text-dark)"
+                    }
                 `}
               >
                 <UICore.Text mb="2px" mt="6px" weight="600" color="inherit">
@@ -212,7 +217,6 @@ function SidePanel({
                   {new Date(response.createdAt).toLocaleString()}
                 </UICore.Text>
               </UICore.Box>
-              <div className="hl" />
             </div>
           ))}
         </UICore.Box>
@@ -254,15 +258,13 @@ function SidePanel({
               }
             `}
             breakLabel="..."
-            nextLabel={<Icons.ArrowRightCircle width="12px" strokeWidth={4} />}
+            nextLabel={"Next"}
             onPageChange={handlePageClick}
             pageRangeDisplayed={1}
             marginPagesDisplayed={0}
             pageCount={pageCount}
             activeClassName="active"
-            previousLabel={
-              <Icons.ArrowLeftCircle width="12px" strokeWidth={4} />
-            }
+            previousLabel={"Prev"}
             renderOnZeroPageCount={null}
           />
         </UICore.Box>
