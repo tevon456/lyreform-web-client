@@ -11,20 +11,20 @@ export default function FormSubmit({ triggerRender = () => {}, ...rest }) {
       br="none"
       bg="white"
       maxWidth="300px"
+      width="282px"
       border="1px solid var(--neutral-400)"
-      style={{ bottom: "0px", position: "sticky" }}
+      style={{ bottom: "12px", position: "fixed" }}
     >
       <UICore.Button
         type="submit"
-        variant="outline"
         kind="secondary"
         hover="var(--primary-hovered)"
         fullWidth
         onClick={() => triggerRender()}
         className="margin-top--sm margin-bottom--sm"
       >
-        Save changes
-      </UICore.Button>{" "}
+        Apply changes
+      </UICore.Button>
     </UICore.Box>
   );
 }
